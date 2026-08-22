@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 200 88" width="200" height="88">
+  <defs>
+    <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F97316"/>
+      <stop offset="1" stop-color="#F472B6"/>
+    </linearGradient>
+  </defs>
+  <polygon points="100,10 105,15 100,20 95,15" fill="url(#g1)"/>
+  <text x="100" y="56" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="38" font-weight="800" fill="#F1F5F9">EasySQL</text>
+  <text x="100" y="74" text-anchor="middle" font-family="'Inter', system-ui, sans-serif" font-size="9.5" font-weight="400" letter-spacing="3" fill="#94A3B8">NATURAL LANGUAGE → SQL</text>
+</svg>
