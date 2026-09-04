@@ -14,7 +14,7 @@
 
 <p align="center">
   <a href="https://easysql.net"><img src="https://img.shields.io/badge/Product-easysql.net-F97316?style=flat-square" alt="EasySQL"></a>
-  <a href="https://clearsoft.net"><img src="https://img.shields.io/badge/Holding-clearsoft.net-0F2B3D?style=flat-square" alt="Clearsoft"></a>
+  <a href="https://clearsoft.net"><img src="https://img.shields.io/badge/Company-clearsoft.net-0F2B3D?style=flat-square" alt="Clearsoft"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Brand%20%26%20Trademark-F472B6?style=flat-square" alt="License"></a>
 </p>
 
@@ -23,7 +23,7 @@
 ## 🎨 Official Color Palette
 
 ### Brand Gradient ("E" Monogram Tile)
-The gradient visually connects EasySQL to [Clearsoft](https://clearsoft.net):
+The gradient visually connects EasySQL to its parent company, [Clearsoft](https://clearsoft.net):
 * **Start:** `#F97316` (Orange)
 * **End:** `#F472B6` (Pink)
 * **Letter "E":** `#FFFFFF` (White)
