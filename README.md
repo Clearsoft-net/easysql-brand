@@ -49,7 +49,8 @@ For details on clear space (padding), exact proportions, typography guidelines, 
 
 ---
 
-## ⚖️ License & Guidelines
+## ⚖️ License & Trademark Policy
 
-All trademarks and logos belong to **Clearsoft**. 
-These assets are authorized for use in official partnerships, press releases, community integrations, and references to EasySQL. Do not alter the colors, proportions, or orientation of the brand marks.
+All trademarks, logos, and service marks contained in this repository are intellectual property of **Clearsoft**.
+
+Usage of these assets is governed by the **[Clearsoft Brand & Trademark License](./LICENSE)**, which permits referential, editorial, and integration usage while protecting brand integrity. Do not alter colors, proportions, or orientation.
