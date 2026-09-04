@@ -1,8 +1,21 @@
-# EasySQL Brand Assets
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="./logo/01-dark-horizontal.svg">
+    <source media="(prefers-color-scheme: light)" srcset="./logo/02-light-horizontal.svg">
+    <img alt="EasySQL Logo" src="./logo/01-dark-horizontal.svg" width="240">
+  </picture>
+</p>
 
-> Official Brand Kit for EasySQL · A Clearsoft Product
+<h1 align="center">EasySQL Brand Assets</h1>
 
-This repository contains the official visual assets, logo variations, icons, and brand guidelines for **EasySQL**.
+<p align="center">
+  <strong>Official brand kit, logo variations, icons, and guidelines for EasySQL · A Clearsoft Product</strong>
+</p>
+
+<p align="center">
+  <a href="https://easysql.net"><img src="https://img.shields.io/badge/Website-easysql.net-F97316?style=flat-square" alt="Website"></a>
+  <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Brand%20%26%20Trademark-F472B6?style=flat-square" alt="License"></a>
+</p>
 
 ---
 
