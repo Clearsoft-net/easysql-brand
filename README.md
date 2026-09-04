@@ -9,11 +9,12 @@
 <h1 align="center">EasySQL Brand Assets</h1>
 
 <p align="center">
-  <strong>Official brand kit, logo variations, icons, and guidelines for EasySQL · A Clearsoft Product</strong>
+  <strong>Official brand kit, logo variations, icons, and guidelines for EasySQL · A <a href="https://clearsoft.net">Clearsoft</a> Product</strong>
 </p>
 
 <p align="center">
-  <a href="https://easysql.net"><img src="https://img.shields.io/badge/Website-easysql.net-F97316?style=flat-square" alt="Website"></a>
+  <a href="https://easysql.net"><img src="https://img.shields.io/badge/Product-easysql.net-F97316?style=flat-square" alt="EasySQL"></a>
+  <a href="https://clearsoft.net"><img src="https://img.shields.io/badge/Holding-clearsoft.net-0F2B3D?style=flat-square" alt="Clearsoft"></a>
   <a href="./LICENSE"><img src="https://img.shields.io/badge/License-Brand%20%26%20Trademark-F472B6?style=flat-square" alt="License"></a>
 </p>
 
@@ -22,7 +23,7 @@
 ## 🎨 Official Color Palette
 
 ### Brand Gradient ("E" Monogram Tile)
-The gradient visually connects EasySQL to Clearsoft:
+The gradient visually connects EasySQL to [Clearsoft](https://clearsoft.net):
 * **Start:** `#F97316` (Orange)
 * **End:** `#F472B6` (Pink)
 * **Letter "E":** `#FFFFFF` (White)
@@ -64,6 +65,6 @@ For details on clear space (padding), exact proportions, typography guidelines, 
 
 ## ⚖️ License & Trademark Policy
 
-All trademarks, logos, and service marks contained in this repository are intellectual property of **Clearsoft**.
+All trademarks, logos, and service marks contained in this repository are intellectual property of **[Clearsoft](https://clearsoft.net)**.
 
 Usage of these assets is governed by the **[Clearsoft Brand & Trademark License](./LICENSE)**, which permits referential, editorial, and integration usage while protecting brand integrity. Do not alter colors, proportions, or orientation.
