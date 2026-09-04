@@ -1,55 +1,55 @@
 # EasySQL Brand Assets
 
-> Brand kit oficial do EasySQL · Produto Clearsoft
+> Official Brand Kit for EasySQL · A Clearsoft Product
 
-Este repositório contém os ativos visuais oficiais, variações do logotipo, ícones e diretrizes de identidade visual do **EasySQL**.
+This repository contains the official visual assets, logo variations, icons, and brand guidelines for **EasySQL**.
 
 ---
 
-## 🎨 Paleta de Cores Oficial
+## 🎨 Official Color Palette
 
-### Gradiente da Marca (Monograma "E")
-O gradiente conecta visualmente o EasySQL à holding Clearsoft:
-* **Início:** `#F97316` (Laranja)
-* **Fim:** `#F472B6` (Rosa)
-* **Letra "E":** `#FFFFFF` (Branco)
+### Brand Gradient ("E" Monogram Tile)
+The gradient visually connects EasySQL to Clearsoft:
+* **Start:** `#F97316` (Orange)
+* **End:** `#F472B6` (Pink)
+* **Letter "E":** `#FFFFFF` (White)
 
-### Tipografia e Texto
+### Typography & Text
 * **Dark Mode:** `#F1F5F9` (Slate 100)
 * **Light Mode:** `#0F172A` (Slate 900)
-* **Subtítulos / Apoio:** `#94A3B8` (Dark) / `#64748B` (Light)
+* **Subtitle / Secondary:** `#94A3B8` (Dark) / `#64748B` (Light)
 
-### Fundos Recomendados
-* **Dark Background (Produto):** `#0F2B3D` (Azul petróleo) ou `#0B1E2B`
-* **Light Background:** `#FFFFFF` ou `#F8FAFC`
+### Recommended Backgrounds
+* **Dark Background (Product):** `#0F2B3D` (Petroleum Blue) or `#0B1E2B`
+* **Light Background:** `#FFFFFF` or `#F8FAFC`
 
 ---
 
-## 📁 Arquivos e Variações
+## 📁 Files & Variations
 
-Todos os arquivos estão disponíveis em vetor (`.svg`) e bitmap de alta densidade (`.png`) no diretório [`logo/`](./logo):
+All variations are available as scalable vectors (`.svg`) and high-resolution bitmaps (`.png`) under the [`logo/`](./logo) directory:
 
-| # | Variação | SVG | PNG | Uso Recomendado |
+| # | Variation | SVG | PNG | Recommended Usage |
 | :---: | :--- | :---: | :---: | :--- |
-| **01** | Horizontal (Dark) | [SVG](./logo/01-dark-horizontal.svg) | [PNG](./logo/01-dark-horizontal.png) | Headers, dashboards e aplicações com tema escuro. |
-| **02** | Horizontal (Light) | [SVG](./logo/02-light-horizontal.svg) | [PNG](./logo/02-light-horizontal.png) | Documentos, landing pages claras e PDFs. |
-| **03** | Empilhado (Dark) | [SVG](./logo/03-dark-stacked.svg) | [PNG](./logo/03-dark-stacked.png) | Cards, telas de login e apresentações em fundo escuro. |
-| **04** | Empilhado (Light) | [SVG](./logo/04-light-stacked.svg) | [PNG](./logo/04-light-stacked.png) | Materiais impressos, apresentações e telas claras. |
-| **05** | Wordmark (Dark) | [SVG](./logo/05-dark-text-only.svg) | [PNG](./logo/05-dark-text-only.png) | Apenas texto "EasySQL" para temas escuros. |
-| **06** | Wordmark (Light) | [SVG](./logo/06-light-text-only.svg) | [PNG](./logo/06-light-text-only.png) | Apenas texto "EasySQL" para temas claros. |
-| **07** | Ícone (Dark) | [SVG](./logo/07-dark-icon-only.svg) | [PNG](./logo/07-dark-icon-only.png) | Favicon, avatar de redes sociais e app icon (dark). |
-| **08** | Ícone (Light) | [SVG](./logo/08-light-icon-only.svg) | [PNG](./logo/08-light-icon-only.png) | Favicon e avatares para fundos claros (com borda sutil). |
+| **01** | Horizontal (Dark) | [SVG](./logo/01-dark-horizontal.svg) | [PNG](./logo/01-dark-horizontal.png) | Headers, dashboards, and dark-themed interfaces. |
+| **02** | Horizontal (Light) | [SVG](./logo/02-light-horizontal.svg) | [PNG](./logo/02-light-horizontal.png) | Documents, light landing pages, and PDFs. |
+| **03** | Stacked (Dark) | [SVG](./logo/03-dark-stacked.svg) | [PNG](./logo/03-dark-stacked.png) | Cards, login screens, and dark presentation slides. |
+| **04** | Stacked (Light) | [SVG](./logo/04-light-stacked.svg) | [PNG](./logo/04-light-stacked.png) | Print materials, light slides, and documents. |
+| **05** | Wordmark (Dark) | [SVG](./logo/05-dark-text-only.svg) | [PNG](./logo/05-dark-text-only.png) | "EasySQL" text only for dark backgrounds. |
+| **06** | Wordmark (Light) | [SVG](./logo/06-light-text-only.svg) | [PNG](./logo/06-light-text-only.png) | "EasySQL" text only for light backgrounds. |
+| **07** | Icon (Dark) | [SVG](./logo/07-dark-icon-only.svg) | [PNG](./logo/07-dark-icon-only.png) | Favicon, social media avatar, and dark app icon. |
+| **08** | Icon (Light) | [SVG](./logo/08-light-icon-only.svg) | [PNG](./logo/08-light-icon-only.png) | Favicon and social avatars for light backgrounds (with subtle border). |
 
 ---
 
-## 📐 Especificações Completas
+## 📐 Full Specifications
 
-Para detalhes sobre área de respiro (padding), proporções exatas, regras de não-distorção e tipografia, consulte o documento completo:
-👉 **[Guia Completo de Especificações](./logo/logo-specification.md)**
+For details on clear space (padding), exact proportions, typography guidelines, and do's/don'ts, see the full specification:
+👉 **[Complete Brand Specification Guide](./logo/logo-specification.md)**
 
 ---
 
-## ⚖️ Licença e Uso
+## ⚖️ License & Guidelines
 
-Os direitos autorais dos logotipos e marcas comerciais pertencem à **Clearsoft**. 
-O uso destes ativos é autorizado para referência à ferramenta, parcerias oficiais, imprensa e integrações com o EasySQL. É proibido alterar as cores ou proporções do monograma.
+All trademarks and logos belong to **Clearsoft**. 
+These assets are authorized for use in official partnerships, press releases, community integrations, and references to EasySQL. Do not alter the colors, proportions, or orientation of the brand marks.
