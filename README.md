@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="./logo/01-dark-horizontal.svg">
     <source media="(prefers-color-scheme: light)" srcset="./logo/02-light-horizontal.svg">
-    <img alt="EasySQL Logo" src="./logo/01-dark-horizontal.svg" width="240">
+    <img alt="EasySQL Logo" src="./logo/01-dark-horizontal.svg">
   </picture>
 </p>
 
