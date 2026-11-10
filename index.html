@@ -1,0 +1,1790 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>EasySQL · Brand Assets & Guidelines</title>
+  <link rel="icon" type="image/svg+xml" href="./icon/exports/svg/07-dark-icon-only.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Geist:wght@100..900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brand-orange: #F97316;
+      --brand-pink: #F472B6;
+      --brand-gradient: linear-gradient(135deg, #F97316 0%, #F472B6 100%);
+      --bg-petroleum: #0F2B3D;
+      --bg-petroleum-dark: #0B1E2B;
+      --slate-50: #F8FAFC;
+      --slate-100: #F1F5F9;
+      --slate-200: #E2E8F0;
+      --slate-300: #CBD5E1;
+      --slate-400: #94A3B8;
+      --slate-500: #64748B;
+      --slate-700: #334155;
+      --slate-800: #1E293B;
+      --slate-900: #0F172A;
+      --white: #FFFFFF;
+      --sidebar-width: 260px;
+      --radius-sm: 4px;
+      --radius-md: 6px;
+      --radius-lg: 10px;
+      --radius-xl: 14px;
+      --shadow-sm: 0 1px 2px rgba(0,0,0,0.18);
+      --shadow-md: 0 4px 12px rgba(0,0,0,0.18);
+      --shadow-lg: 0 10px 24px rgba(0,0,0,0.22);
+      --transition: all 0.15s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      font-family: 'Geist', -apple-system, BlinkMacSystemFont, sans-serif;
+      background-color: var(--bg-petroleum-dark);
+      color: var(--slate-100);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+      display: flex;
+      min-height: 100vh;
+    }
+
+    /* Checkerboard pattern for transparency */
+    .checkerboard {
+      background-color: #1e293b;
+      background-image: 
+        linear-gradient(45deg, #0f172a 25%, transparent 25%),
+        linear-gradient(-45deg, #0f172a 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #0f172a 75%),
+        linear-gradient(-45deg, transparent 75%, #0f172a 75%);
+      background-size: 16px 16px;
+      background-position: 0 0, 0 8px, 8px -8px, -8px 0px;
+    }
+
+    /* Discrete Sidebar Navigation */
+    .sidebar {
+      position: fixed;
+      top: 0;
+      left: 0;
+      bottom: 0;
+      width: var(--sidebar-width);
+      background: rgba(11, 30, 43, 0.95);
+      backdrop-filter: blur(20px);
+      border-right: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      padding: 28px 20px;
+      z-index: 100;
+      overflow-y: auto;
+    }
+
+    .sidebar-header {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      margin-bottom: 28px;
+    }
+
+    .sidebar-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .sidebar-brand img {
+      width: 100%;
+      height: auto;
+    }
+
+    .sidebar-visit {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 11px;
+      font-weight: 500;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: var(--slate-400);
+      text-decoration: none;
+      transition: var(--transition);
+      width: fit-content;
+      align-self: center;
+    }
+
+    .sidebar-visit:hover {
+      color: var(--white);
+    }
+
+    /* Sidebar Navigation Links */
+    .sidebar-nav {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 4px;
+      flex: 1;
+    }
+
+    .sidebar-nav-title {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--slate-500);
+      padding: 12px 14px 6px;
+    }
+
+    .sidebar-link {
+      position: relative;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 14px;
+      color: var(--slate-400);
+      text-decoration: none;
+      font-size: 13.5px;
+      font-weight: 500;
+      border-radius: var(--radius-sm);
+      transition: var(--transition);
+    }
+
+    .sidebar-link .nav-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--slate-600);
+      transition: var(--transition);
+    }
+
+    .sidebar-link:hover {
+      color: var(--slate-100);
+      background: rgba(255, 255, 255, 0.04);
+    }
+
+    .sidebar-link:hover .nav-dot {
+      background: var(--slate-300);
+    }
+
+    .sidebar-link.active {
+      color: var(--white);
+      font-weight: 600;
+      background: rgba(255, 255, 255, 0.08);
+    }
+
+    .sidebar-link.active .nav-dot {
+      background: var(--brand-orange);
+    }
+
+    .sidebar-link.active::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 6px;
+      bottom: 6px;
+      width: 3px;
+      border-radius: 0 3px 3px 0;
+      background: var(--brand-gradient);
+    }
+
+    /* Sidebar Footer */
+    .sidebar-footer {
+      padding-top: 20px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+    }
+
+    .github-badge-link {
+      display: inline-block;
+      transition: var(--transition);
+      opacity: 0.9;
+    }
+
+    .github-badge-link:hover {
+      opacity: 1;
+    }
+
+    .github-badge-link img {
+      display: block;
+      height: 20px;
+      border-radius: 3px;
+    }
+
+    .sidebar-legal {
+      font-size: 11px;
+      color: var(--slate-500);
+      line-height: 1.4;
+    }
+
+    .sidebar-legal a {
+      color: var(--slate-400);
+      text-decoration: none;
+    }
+
+    .sidebar-legal a:hover {
+      color: var(--white);
+    }
+
+    /* Main Content Wrapper */
+    .main-content {
+      margin-left: var(--sidebar-width);
+      flex: 1;
+      min-width: 0;
+      padding: 0 48px;
+      max-width: 1280px;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0 56px;
+      position: relative;
+    }
+
+    .hero-pretitle {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--brand-orange);
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: 46px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.15;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span.title-accent {
+      color: var(--slate-400);
+    }
+
+    .hero p {
+      max-width: 720px;
+      font-size: 17px;
+      color: var(--slate-400);
+      font-weight: 400;
+      margin-bottom: 28px;
+    }
+
+    .hero-badges {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 28px;
+    }
+
+    .hero-badges a {
+      display: inline-flex;
+      transition: var(--transition);
+    }
+
+    .hero-badges a:hover {
+      opacity: 0.85;
+    }
+
+    .hero-actions {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      font-weight: 600;
+      padding: 10px 18px;
+      border-radius: var(--radius-md);
+      text-decoration: none;
+      transition: var(--transition);
+      cursor: pointer;
+      border: 1px solid transparent;
+    }
+
+    .btn-primary {
+      background: var(--brand-gradient);
+      color: var(--white);
+      box-shadow: 0 2px 8px rgba(249, 115, 22, 0.25);
+    }
+
+    .btn-primary:hover {
+      box-shadow: 0 4px 12px rgba(249, 115, 22, 0.3);
+    }
+
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.08);
+      color: var(--slate-100);
+      border-color: rgba(255, 255, 255, 0.12);
+    }
+
+    .btn-secondary:hover {
+      background: rgba(255, 255, 255, 0.14);
+      border-color: rgba(255, 255, 255, 0.2);
+    }
+
+    /* Section Styles */
+    section {
+      padding: 64px 0;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .section-header {
+      margin-bottom: 36px;
+    }
+
+    .section-header .tag {
+      font-size: 12px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+      color: var(--brand-pink);
+      margin-bottom: 8px;
+      display: inline-block;
+    }
+
+    .section-header h2 {
+      font-size: 30px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--white);
+      margin-bottom: 8px;
+    }
+
+    .section-header p {
+      color: var(--slate-400);
+      font-size: 15px;
+      max-width: 680px;
+    }
+
+    /* Colors Grid */
+    .color-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+      gap: 20px;
+    }
+
+    .color-card {
+      background: rgba(15, 43, 61, 0.6);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      transition: var(--transition);
+      cursor: pointer;
+    }
+
+    .color-card:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: var(--shadow-md);
+    }
+
+    .color-preview {
+      height: 110px;
+      display: flex;
+      align-items: flex-end;
+      padding: 14px;
+      position: relative;
+    }
+
+    .color-info {
+      padding: 16px;
+      background: rgba(11, 30, 43, 0.95);
+    }
+
+    .color-name {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .color-role {
+      font-size: 12px;
+      color: var(--slate-400);
+      margin-bottom: 12px;
+    }
+
+    .color-value {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      font-weight: 500;
+      color: var(--slate-200);
+      background: rgba(255, 255, 255, 0.06);
+      padding: 6px 10px;
+      border-radius: var(--radius-sm);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .color-value svg {
+      opacity: 0.6;
+      transition: var(--transition);
+    }
+
+    .color-card:hover .color-value svg {
+      opacity: 1;
+    }
+
+    /* Asset Grid */
+    .asset-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
+      gap: 24px;
+    }
+
+    .asset-card {
+      background: rgba(15, 43, 61, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: var(--transition);
+    }
+
+    .asset-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      box-shadow: var(--shadow-md);
+    }
+
+    .asset-canvas {
+      height: 200px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 24px;
+      position: relative;
+    }
+
+    .asset-canvas.dark {
+      background: var(--bg-petroleum);
+    }
+
+    .asset-canvas.light {
+      background: #FFFFFF;
+    }
+
+    .asset-canvas img {
+      max-width: 82%;
+      max-height: 82%;
+      object-fit: contain;
+    }
+
+    .asset-meta {
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: rgba(11, 30, 43, 0.85);
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+      flex: 1;
+    }
+
+    .asset-title-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .asset-title {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .asset-num {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 6px;
+      background: rgba(255, 255, 255, 0.08);
+      border-radius: 4px;
+      color: var(--brand-orange);
+    }
+
+    .asset-desc {
+      font-size: 13px;
+      color: var(--slate-400);
+      line-height: 1.45;
+    }
+
+    .asset-downloads {
+      margin-top: auto;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding-top: 12px;
+      border-top: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .download-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 5px 10px;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--slate-200);
+      text-decoration: none;
+      transition: var(--transition);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .download-pill:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .download-pill.primary {
+      background: rgba(249, 115, 22, 0.15);
+      color: var(--brand-orange);
+      border-color: rgba(249, 115, 22, 0.35);
+    }
+
+    .download-pill.primary:hover {
+      background: rgba(249, 115, 22, 0.25);
+      border-color: var(--brand-orange);
+    }
+
+    /* Platform Drop-in Cards */
+    .platform-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+      gap: 16px;
+      margin-top: 20px;
+    }
+
+    .platform-card {
+      background: rgba(11, 30, 43, 0.7);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+    }
+
+    .platform-card-info {
+      display: flex;
+      flex-direction: column;
+      gap: 2px;
+    }
+
+    .platform-card-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .platform-card-meta {
+      font-size: 12px;
+      color: var(--slate-400);
+    }
+
+    /* Interactive Playground */
+    .playground-box {
+      background: rgba(15, 43, 61, 0.5);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-xl);
+      padding: 32px;
+    }
+
+    .playground-controls {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 20px;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    }
+
+    .control-group {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .control-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--slate-400);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+
+    .select-custom {
+      background: var(--slate-900);
+      color: var(--slate-100);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      padding: 8px 14px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+      cursor: pointer;
+    }
+
+    .bg-presets {
+      display: flex;
+      gap: 8px;
+    }
+
+    .bg-preset-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      border: 2px solid transparent;
+      cursor: pointer;
+      transition: var(--transition);
+      box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+    }
+
+    .bg-preset-btn:hover {
+      border-color: rgba(255, 255, 255, 0.35);
+    }
+
+    .bg-preset-btn.active {
+      border-color: var(--brand-orange);
+    }
+
+    .playground-stage {
+      height: 360px;
+      border-radius: var(--radius-lg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+      transition: background 0.25s ease;
+      box-shadow: inset 0 2px 10px rgba(0,0,0,0.2);
+    }
+
+    .playground-logo-wrapper {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: width 0.15s ease;
+    }
+
+    .playground-logo-wrapper.show-safe-area::before {
+      content: "";
+      position: absolute;
+      inset: -24px;
+      border: 2px dashed rgba(244, 114, 182, 0.7);
+      background: rgba(244, 114, 182, 0.08);
+      border-radius: 8px;
+      pointer-events: none;
+    }
+
+    .playground-logo-wrapper img {
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+
+    /* Specs & Rules */
+    .rules-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+    }
+
+    .rule-card {
+      background: rgba(15, 43, 61, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 24px;
+    }
+
+    .rule-card h3 {
+      font-size: 16px;
+      font-weight: 700;
+      margin-bottom: 16px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .rule-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      font-size: 14px;
+      color: var(--slate-300);
+    }
+
+    .rule-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.5;
+    }
+
+    .rule-list li span.icon-check {
+      color: #10B981;
+      font-weight: bold;
+    }
+
+    .rule-list li span.icon-cross {
+      color: #EF4444;
+      font-weight: bold;
+    }
+
+    /* Code Snippet Box */
+    .code-box {
+      background: #08151f;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-md);
+      padding: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13px;
+      color: var(--slate-300);
+      position: relative;
+      overflow-x: auto;
+      margin-top: 16px;
+    }
+
+    .code-copy-btn {
+      position: absolute;
+      top: 12px;
+      right: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      color: var(--slate-200);
+      font-size: 12px;
+      font-weight: 600;
+      padding: 4px 10px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .code-copy-btn:hover {
+      background: rgba(255, 255, 255, 0.2);
+      color: var(--white);
+    }
+
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      background: #0f172a;
+      color: var(--white);
+      border: 1px solid var(--brand-orange);
+      padding: 12px 20px;
+      border-radius: var(--radius-md);
+      font-size: 14px;
+      font-weight: 600;
+      box-shadow: var(--shadow-lg);
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      transform: translateY(100px);
+      opacity: 0;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      z-index: 1000;
+    }
+
+    .toast.show {
+      transform: translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer */
+    footer {
+      padding: 56px 0 40px;
+      border-top: 1px solid rgba(255, 255, 255, 0.08);
+      color: var(--slate-500);
+      font-size: 13px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    footer a {
+      color: var(--slate-400);
+      text-decoration: none;
+      transition: var(--transition);
+    }
+
+    footer a:hover {
+      color: var(--white);
+    }
+
+    /* Mobile toggle */
+    .mobile-menu-btn {
+      display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 20px;
+      z-index: 1001;
+      background: var(--brand-gradient);
+      color: var(--white);
+      border: none;
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      cursor: pointer;
+      box-shadow: var(--shadow-md);
+      align-items: center;
+      justify-content: center;
+    }
+
+    @media (max-width: 960px) {
+      .sidebar {
+        transform: translateX(-100%);
+        transition: transform 0.3s ease;
+      }
+      .sidebar.open {
+        transform: translateX(0);
+      }
+      .mobile-menu-btn {
+        display: flex;
+      }
+      .main-content {
+        margin-left: 0;
+        padding: 0 20px;
+      }
+      .hero h1 { font-size: 34px; }
+      .asset-grid { grid-template-columns: 1fr; }
+      .playground-controls { flex-direction: column; align-items: flex-start; }
+    }
+
+    /* Border Radius & Geometry System */
+    .radius-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 20px;
+      margin-bottom: 28px;
+    }
+
+    .radius-card {
+      background: rgba(15, 43, 61, 0.45);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      transition: var(--transition);
+    }
+
+    .radius-card:hover {
+      border-color: rgba(255, 255, 255, 0.18);
+      transform: translateY(-2px);
+    }
+
+    .radius-card-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+    }
+
+    .radius-token-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--white);
+    }
+
+    .radius-token-val {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 12px;
+      font-weight: 600;
+      padding: 2px 8px;
+      border-radius: 4px;
+      background: rgba(249, 115, 22, 0.12);
+      color: var(--brand-orange);
+      border: 1px solid rgba(249, 115, 22, 0.25);
+    }
+
+    .radius-demo-box {
+      height: 76px;
+      background: linear-gradient(135deg, rgba(249, 115, 22, 0.14) 0%, rgba(244, 114, 182, 0.14) 100%);
+      border: 2px solid var(--brand-orange);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--white);
+    }
+
+    .radius-card-desc {
+      font-size: 13px;
+      color: var(--slate-400);
+      line-height: 1.5;
+    }
+
+    .squircle-formula-box {
+      background: rgba(11, 30, 43, 0.85);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: var(--radius-md);
+      padding: 20px 24px;
+      margin-bottom: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .squircle-formula {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 13.5px;
+      color: var(--brand-orange);
+      background: rgba(249, 115, 22, 0.08);
+      padding: 8px 14px;
+      border-radius: 6px;
+      border: 1px solid rgba(249, 115, 22, 0.2);
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Discrete Sidebar Navigation -->
+  <aside class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+      <a href="#overview" class="sidebar-brand">
+        <img src="./logo/exports/svg/01-dark-horizontal.svg" alt="EasySQL Logo">
+      </a>
+      <a href="https://easysql.net" target="_blank" rel="noopener" class="sidebar-visit">
+        Visit Website ↗
+      </a>
+    </div>
+
+    <!-- Navigation List (Updates on Scroll) -->
+    <ul class="sidebar-nav">
+      <li class="sidebar-nav-title">Brand Kit</li>
+      <li>
+        <a href="#overview" class="sidebar-link active" data-section="overview">
+          <span class="nav-dot"></span>
+          <span>Overview</span>
+        </a>
+      </li>
+      <li>
+        <a href="#palette" class="sidebar-link" data-section="palette">
+          <span class="nav-dot"></span>
+          <span>Color Palette</span>
+        </a>
+      </li>
+      <li>
+        <a href="#radius" class="sidebar-link" data-section="radius">
+          <span class="nav-dot"></span>
+          <span>Border Radius</span>
+        </a>
+      </li>
+      <li>
+        <a href="#logos" class="sidebar-link" data-section="logos">
+          <span class="nav-dot"></span>
+          <span>Logos &amp; Lockups</span>
+        </a>
+      </li>
+      <li>
+        <a href="#icons" class="sidebar-link" data-section="icons">
+          <span class="nav-dot"></span>
+          <span>Icons &amp; Monogram</span>
+        </a>
+      </li>
+      <li>
+        <a href="#platform" class="sidebar-link" data-section="platform">
+          <span class="nav-dot"></span>
+          <span>Web &amp; App Assets</span>
+        </a>
+      </li>
+      <li>
+        <a href="#tester" class="sidebar-link" data-section="tester">
+          <span class="nav-dot"></span>
+          <span>Interactive Tester</span>
+        </a>
+      </li>
+      <li>
+        <a href="#guidelines" class="sidebar-link" data-section="guidelines">
+          <span class="nav-dot"></span>
+          <span>Usage Guidelines</span>
+        </a>
+      </li>
+    </ul>
+
+    <!-- Sidebar Footer -->
+    <div class="sidebar-footer">
+      <a href="https://github.com/Clearsoft-net/easysql-brand" target="_blank" rel="noopener" class="github-badge-link" title="Clearsoft-net/easysql-brand on GitHub">
+        <img src="https://img.shields.io/badge/GitHub-Clearsoft--net%2Feasysql--brand-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub: Clearsoft-net/easysql-brand">
+      </a>
+      <div class="sidebar-legal">
+        © 2026 <a href="https://clearsoft.net" target="_blank" rel="noopener">Clearsoft</a><br>
+        <a href="./LICENSE">Brand &amp; Trademark License</a>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Mobile Toggle Button -->
+  <button class="mobile-menu-btn" onclick="toggleSidebar()" aria-label="Toggle Menu">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+  </button>
+
+  <!-- Main Content Area -->
+  <main class="main-content">
+
+    <!-- Hero / Overview Section -->
+    <section class="hero" id="overview">
+      <div class="hero-pretitle">Official Brand Assets</div>
+      <h1>EasySQL <span class="title-accent">Brand Kit</span></h1>
+      <p>Logos, typography, color palettes, and official digital assets for EasySQL. Built with precision for interfaces, documentation, and partner integrations.</p>
+      
+      <!-- Badges Row -->
+      <div class="hero-badges">
+        <a href="https://easysql.net" target="_blank" rel="noopener">
+          <img src="https://img.shields.io/badge/Product-easysql.net-F97316?style=flat-square" alt="EasySQL">
+        </a>
+        <a href="https://clearsoft.net" target="_blank" rel="noopener">
+          <img src="https://img.shields.io/badge/Company-clearsoft.net-0F2B3D?style=flat-square" alt="Clearsoft">
+        </a>
+        <a href="https://github.com/Clearsoft-net/easysql-brand" target="_blank" rel="noopener">
+          <img src="https://img.shields.io/badge/GitHub-Clearsoft--net%2Feasysql--brand-181717?style=flat-square&logo=github&logoColor=white" alt="GitHub Repository">
+        </a>
+        <a href="./LICENSE">
+          <img src="https://img.shields.io/badge/License-Brand%20%26%20Trademark-F472B6?style=flat-square" alt="License">
+        </a>
+      </div>
+
+      <div class="hero-actions">
+        <a href="#logos" class="btn btn-primary">Browse Assets</a>
+        <a href="#tester" class="btn btn-secondary">Interactive Tester</a>
+        <a href="./docs/logo-specification.md" class="btn btn-secondary" target="_blank">Brand Specification Guide</a>
+      </div>
+    </section>
+
+    <!-- Official Color Palette -->
+    <section id="palette">
+      <div class="section-header">
+        <span class="tag">Color System</span>
+        <h2>Official Palette</h2>
+        <p>Click any color card to copy the HEX code to your clipboard.</p>
+      </div>
+
+      <div class="color-grid">
+        <!-- Gradient Start -->
+        <div class="color-card" onclick="copyColor('#F97316', 'Brand Orange')">
+          <div class="color-preview" style="background-color: #F97316;"></div>
+          <div class="color-info">
+            <div class="color-name">Brand Orange <span>Orange 500</span></div>
+            <div class="color-role">Gradient Start · Monogram Tile · SQL Accent</div>
+            <div class="color-value">
+              <span>#F97316</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Gradient End -->
+        <div class="color-card" onclick="copyColor('#F472B6', 'Brand Pink')">
+          <div class="color-preview" style="background-color: #F472B6;"></div>
+          <div class="color-info">
+            <div class="color-name">Brand Pink <span>Pink 400</span></div>
+            <div class="color-role">Gradient End · Clearsoft Accent</div>
+            <div class="color-value">
+              <span>#F472B6</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dark Product Background -->
+        <div class="color-card" onclick="copyColor('#0F2B3D', 'Petroleum Blue')">
+          <div class="color-preview" style="background-color: #0F2B3D;"></div>
+          <div class="color-info">
+            <div class="color-name">Petroleum Blue <span>Primary Dark</span></div>
+            <div class="color-role">Product Background · Surface 1</div>
+            <div class="color-value">
+              <span>#0F2B3D</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Deep Dark Background -->
+        <div class="color-card" onclick="copyColor('#0B1E2B', 'Petroleum Dark')">
+          <div class="color-preview" style="background-color: #0B1E2B;"></div>
+          <div class="color-info">
+            <div class="color-name">Petroleum Dark <span>Deep Dark</span></div>
+            <div class="color-role">Deep Contrast Background</div>
+            <div class="color-value">
+              <span>#0B1E2B</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Dark Mode Text -->
+        <div class="color-card" onclick="copyColor('#F1F5F9', 'Slate 100')">
+          <div class="color-preview" style="background-color: #F1F5F9;"></div>
+          <div class="color-info">
+            <div class="color-name">Slate 100 <span>White/Silver</span></div>
+            <div class="color-role">Text in Dark Mode · Monogram "E"</div>
+            <div class="color-value">
+              <span>#F1F5F9</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </div>
+          </div>
+        </div>
+
+        <!-- Light Mode Text -->
+        <div class="color-card" onclick="copyColor('#0F172A', 'Slate 900')">
+          <div class="color-preview" style="background-color: #0F172A;"></div>
+          <div class="color-info">
+            <div class="color-name">Slate 900 <span>Deep Slate</span></div>
+            <div class="color-role">Text in Light Mode</div>
+            <div class="color-value">
+              <span>#0F172A</span>
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- CSS Variables Block -->
+      <div class="code-box">
+        <button class="code-copy-btn" onclick="copyCssVars()">Copy CSS</button>
+        <pre id="css-vars-code"><code>:root {
+  --easysql-orange: #F97316;
+  --easysql-pink: #F472B6;
+  --easysql-gradient: linear-gradient(135deg, #F97316 0%, #F472B6 100%);
+  --easysql-bg-dark: #0F2B3D;
+  --easysql-bg-deep: #0B1E2B;
+  --easysql-text-dark: #F1F5F9;
+  --easysql-text-light: #0F172A;
+}</code></pre>
+      </div>
+    </section>
+
+
+    <!-- Border Radius & Geometry System -->
+    <section id="radius">
+      <div class="section-header">
+        <span class="tag">Geometry &amp; Tokens</span>
+        <h2>Border Radius System</h2>
+        <p>Derived from the official 72×72 px monogram tile (rx=16px), establishing the ~22.2% squircle ratio for brand containers and a cohesive UI scale for applications.</p>
+      </div>
+
+      <!-- Tile Ratio Info Box -->
+      <div class="squircle-formula-box">
+        <div>
+          <div style="font-size: 15px; font-weight: 700; color: var(--white); margin-bottom: 4px;">Brand Tile Squircle Ratio (22.2%)</div>
+          <div style="font-size: 13px; color: var(--slate-400);">App icons, squircle avatars, and brand containers follow:</div>
+        </div>
+        <div class="squircle-formula">R ≈ Size × 0.222 (72px → 16px · 16px → 3.5px)</div>
+      </div>
+
+      <!-- UI Tokens Scale Grid -->
+      <div class="radius-grid">
+        <!-- xs: 4px -->
+        <div class="radius-card">
+          <div class="radius-card-header">
+            <span class="radius-token-name">Extra Small (xs)</span>
+            <span class="radius-token-val">4px</span>
+          </div>
+          <div class="radius-demo-box" style="border-radius: 4px;">4px radius</div>
+          <p class="radius-card-desc">SQL data types (<code>VARCHAR</code>, <code>INT</code>, <code>FK</code>), compact tooltips, tree view badges, sub-nodes.</p>
+        </div>
+
+        <!-- sm: 6px / 8px -->
+        <div class="radius-card">
+          <div class="radius-card-header">
+            <span class="radius-token-name">Small (sm)</span>
+            <span class="radius-token-val">6px · 8px</span>
+          </div>
+          <div class="radius-demo-box" style="border-radius: 8px;">6–8px radius</div>
+          <p class="radius-card-desc">Form inputs, select dropdowns, secondary action buttons, context menus, list selectors.</p>
+        </div>
+
+        <!-- md: 10px / 12px -->
+        <div class="radius-card">
+          <div class="radius-card-header">
+            <span class="radius-token-name">Medium (md)</span>
+            <span class="radius-token-val">10px · 12px</span>
+          </div>
+          <div class="radius-demo-box" style="border-radius: 12px;">10–12px radius</div>
+          <p class="radius-card-desc">Primary buttons (CTAs), query editors, SQL code blocks, filter dialogs, inner card surfaces.</p>
+        </div>
+
+        <!-- lg: 16px -->
+        <div class="radius-card">
+          <div class="radius-card-header">
+            <span class="radius-token-name">Large (lg) · Brand Signature</span>
+            <span class="radius-token-val">16px</span>
+          </div>
+          <div class="radius-demo-box" style="border-radius: 16px;">16px radius</div>
+          <p class="radius-card-desc">Main dashboard cards, modals, side-drawers. Directly mirrors the 16px curvature of the official monogram.</p>
+        </div>
+
+        <!-- xl: 24px -->
+        <div class="radius-card">
+          <div class="radius-card-header">
+            <span class="radius-token-name">Extra Large (xl)</span>
+            <span class="radius-token-val">24px</span>
+          </div>
+          <div class="radius-demo-box" style="border-radius: 24px;">24px radius</div>
+          <p class="radius-card-desc">Hero feature panels, marketing callouts, elevated onboarding containers.</p>
+        </div>
+
+        <!-- full: 9999px -->
+        <div class="radius-card">
+          <div class="radius-card-header">
+            <span class="radius-token-name">Pill / Full</span>
+            <span class="radius-token-val">9999px</span>
+          </div>
+          <div class="radius-demo-box" style="border-radius: 9999px;">Pill / Full</div>
+          <p class="radius-card-desc">Status indicators (Connected, Synced), category tags, floating action chips, circular buttons.</p>
+        </div>
+      </div>
+
+      <!-- CSS Tokens Snippet -->
+      <div class="code-box">
+        <button class="code-copy-btn" onclick="copyRadiusTokens()">Copy Tokens</button>
+        <pre id="radius-tokens-code"><code>:root {
+  --radius-xs: 4px;      /* SQL type badges, tree nodes */
+  --radius-sm: 8px;      /* Form inputs, select dropdowns, secondary buttons */
+  --radius-md: 12px;     /* Primary CTAs, query editors, code blocks */
+  --radius-lg: 16px;     /* Dashboard cards, modals (brand signature) */
+  --radius-xl: 24px;     /* Hero feature panels, callouts */
+  --radius-full: 9999px; /* Status pills, chips */
+  --tile-ratio: 0.222;   /* Squircle: rx = size * 0.222 */
+}</code></pre>
+      </div>
+    </section>
+
+        <!-- Logos & Lockups -->
+    <section id="logos">
+      <div class="section-header">
+        <span class="tag">Lockups</span>
+        <h2>Official Logos</h2>
+        <p>Available as outlined SVG and high-resolution PNG (1×, 2×, 3×). The wordmark pairs Space Grotesk ("Easy") with Geist ("SQL"); monochrome variants cover one-color reproduction.</p>
+      </div>
+
+      <div class="asset-grid">
+        <!-- 01 Dark Horizontal -->
+        <div class="asset-card">
+          <div class="asset-canvas dark">
+            <img src="./logo/exports/svg/01-dark-horizontal.svg" alt="01 Dark Horizontal">
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Horizontal (Dark)</div>
+              <span class="asset-num">01</span>
+            </div>
+            <p class="asset-desc">Primary lockup for dark dashboards, headers, and UI headers.</p>
+            <div class="asset-downloads">
+              <a href="./logo/exports/svg/01-dark-horizontal.svg" download class="download-pill primary">SVG</a>
+              <a href="./logo/exports/png/1x/01-dark-horizontal.png" download class="download-pill">PNG 1×</a>
+              <a href="./logo/exports/png/2x/01-dark-horizontal.png" download class="download-pill">PNG 2×</a>
+              <a href="./logo/exports/png/3x/01-dark-horizontal.png" download class="download-pill">PNG 3×</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 Light Horizontal -->
+        <div class="asset-card">
+          <div class="asset-canvas light">
+            <img src="./logo/exports/svg/02-light-horizontal.svg" alt="02 Light Horizontal">
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Horizontal (Light)</div>
+              <span class="asset-num">02</span>
+            </div>
+            <p class="asset-desc">Optimized for white and light-gray documents, presentations, and light themes.</p>
+            <div class="asset-downloads">
+              <a href="./logo/exports/svg/02-light-horizontal.svg" download class="download-pill primary">SVG</a>
+              <a href="./logo/exports/png/1x/02-light-horizontal.png" download class="download-pill">PNG 1×</a>
+              <a href="./logo/exports/png/2x/02-light-horizontal.png" download class="download-pill">PNG 2×</a>
+              <a href="./logo/exports/png/3x/02-light-horizontal.png" download class="download-pill">PNG 3×</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Dark Stacked -->
+        <div class="asset-card">
+          <div class="asset-canvas dark">
+            <img src="./logo/exports/svg/03-dark-stacked.svg" alt="03 Dark Stacked">
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Stacked (Dark)</div>
+              <span class="asset-num">03</span>
+            </div>
+            <p class="asset-desc">Centered vertical lockup for cards, dark splash screens, and login dialogs.</p>
+            <div class="asset-downloads">
+              <a href="./logo/exports/svg/03-dark-stacked.svg" download class="download-pill primary">SVG</a>
+              <a href="./logo/exports/png/1x/03-dark-stacked.png" download class="download-pill">PNG 1×</a>
+              <a href="./logo/exports/png/2x/03-dark-stacked.png" download class="download-pill">PNG 2×</a>
+              <a href="./logo/exports/png/3x/03-dark-stacked.png" download class="download-pill">PNG 3×</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 Light Stacked -->
+        <div class="asset-card">
+          <div class="asset-canvas light">
+            <img src="./logo/exports/svg/04-light-stacked.svg" alt="04 Light Stacked">
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Stacked (Light)</div>
+              <span class="asset-num">04</span>
+            </div>
+            <p class="asset-desc">Centered vertical lockup for light backgrounds, reports, and print.</p>
+            <div class="asset-downloads">
+              <a href="./logo/exports/svg/04-light-stacked.svg" download class="download-pill primary">SVG</a>
+              <a href="./logo/exports/png/1x/04-light-stacked.png" download class="download-pill">PNG 1×</a>
+              <a href="./logo/exports/png/2x/04-light-stacked.png" download class="download-pill">PNG 2×</a>
+              <a href="./logo/exports/png/3x/04-light-stacked.png" download class="download-pill">PNG 3×</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 Dark Wordmark -->
+        <div class="asset-card">
+          <div class="asset-canvas dark">
+            <img src="./logo/exports/svg/05-dark-text-only.svg" alt="05 Dark Wordmark">
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Wordmark (Dark)</div>
+              <span class="asset-num">05</span>
+            </div>
+            <p class="asset-desc">Text-only mark with diamond accent for minimal dark contexts.</p>
+            <div class="asset-downloads">
+              <a href="./logo/exports/svg/05-dark-text-only.svg" download class="download-pill primary">SVG</a>
+              <a href="./logo/exports/png/1x/05-dark-text-only.png" download class="download-pill">PNG 1×</a>
+              <a href="./logo/exports/png/2x/05-dark-text-only.png" download class="download-pill">PNG 2×</a>
+              <a href="./logo/exports/png/3x/05-dark-text-only.png" download class="download-pill">PNG 3×</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 06 Light Wordmark -->
+        <div class="asset-card">
+          <div class="asset-canvas light">
+            <img src="./logo/exports/svg/06-light-text-only.svg" alt="06 Light Wordmark">
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Wordmark (Light)</div>
+              <span class="asset-num">06</span>
+            </div>
+            <p class="asset-desc">Text-only mark with diamond accent for light contexts.</p>
+            <div class="asset-downloads">
+              <a href="./logo/exports/svg/06-light-text-only.svg" download class="download-pill primary">SVG</a>
+              <a href="./logo/exports/png/1x/06-light-text-only.png" download class="download-pill">PNG 1×</a>
+              <a href="./logo/exports/png/2x/06-light-text-only.png" download class="download-pill">PNG 2×</a>
+              <a href="./logo/exports/png/3x/06-light-text-only.png" download class="download-pill">PNG 3×</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Icons & Monograms -->
+    <section id="icons">
+      <div class="section-header">
+        <span class="tag">Favicon & App Icons</span>
+        <h2>Icons & Monogram</h2>
+        <p>Multi-resolution ICO packages and standalone SVG icons for favicons, mobile apps, and social avatars. 16 px and 24 px use a dedicated small-size cut; 32 px and up use the standard icon.</p>
+      </div>
+
+      <div class="asset-grid">
+        <!-- 07 Dark Icon -->
+        <div class="asset-card">
+          <div class="asset-canvas dark">
+            <img src="./icon/exports/svg/07-dark-icon-only.svg" alt="07 Dark Icon" style="width: 96px; height: 96px;">
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Icon Only (Dark)</div>
+              <span class="asset-num">07</span>
+            </div>
+            <p class="asset-desc">Standard gradient tile with white "E" monogram for dark themes and avatars. 16/24 px use the small cut.</p>
+            <div class="asset-downloads">
+              <a href="./icon/exports/svg/07-dark-icon-only.svg" download class="download-pill primary">SVG</a>
+              <a href="./icon/exports/ico/07-dark-icon-only.ico" download class="download-pill">ICO (16-256px)</a>
+              <a href="./icon/exports/png/16x16/07-dark-icon-only.png" download class="download-pill">16px</a>
+              <a href="./icon/exports/png/24x24/07-dark-icon-only.png" download class="download-pill">24px</a>
+              <a href="./icon/exports/png/32x32/07-dark-icon-only.png" download class="download-pill">32px</a>
+              <a href="./icon/exports/png/64x64/07-dark-icon-only.png" download class="download-pill">64px</a>
+              <a href="./icon/exports/png/128x128/07-dark-icon-only.png" download class="download-pill">128px</a>
+              <a href="./icon/exports/png/512x512/07-dark-icon-only.png" download class="download-pill">512px</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 08 Light Icon -->
+        <div class="asset-card">
+          <div class="asset-canvas light">
+            <img src="./icon/exports/svg/08-light-icon-only.svg" alt="08 Light Icon" style="width: 96px; height: 96px;">
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Icon Only (Light)</div>
+              <span class="asset-num">08</span>
+            </div>
+            <p class="asset-desc">Subtle #E2E8F0 ring around the gradient tile for light backgrounds. 16/24 px use the small cut.</p>
+            <div class="asset-downloads">
+              <a href="./icon/exports/svg/08-light-icon-only.svg" download class="download-pill primary">SVG</a>
+              <a href="./icon/exports/ico/08-light-icon-only.ico" download class="download-pill">ICO (16-256px)</a>
+              <a href="./icon/exports/png/16x16/08-light-icon-only.png" download class="download-pill">16px</a>
+              <a href="./icon/exports/png/24x24/08-light-icon-only.png" download class="download-pill">24px</a>
+              <a href="./icon/exports/png/32x32/08-light-icon-only.png" download class="download-pill">32px</a>
+              <a href="./icon/exports/png/64x64/08-light-icon-only.png" download class="download-pill">64px</a>
+              <a href="./icon/exports/png/128x128/08-light-icon-only.png" download class="download-pill">128px</a>
+              <a href="./icon/exports/png/512x512/08-light-icon-only.png" download class="download-pill">512px</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Platform Exports (Web, PWA, macOS) -->
+    <section id="platform">
+      <div class="section-header">
+        <span class="tag">Platform Packages</span>
+        <h2>Drop-in Web & App Assets</h2>
+        <p>Pre-packaged conventional assets ready for direct deployment in HTML, PWAs, Android, and macOS.</p>
+      </div>
+
+      <div class="platform-grid">
+        <div class="platform-card">
+          <div class="platform-card-info">
+            <div class="platform-card-name">favicon.ico</div>
+            <div class="platform-card-meta">16, 32, 48 px multi-res</div>
+          </div>
+          <a href="./icon/exports/web/favicon.ico" download class="download-pill primary">Download</a>
+        </div>
+
+        <div class="platform-card">
+          <div class="platform-card-info">
+            <div class="platform-card-name">apple-touch-icon.png</div>
+            <div class="platform-card-meta">180×180 px (iOS touch)</div>
+          </div>
+          <a href="./icon/exports/web/apple-touch-icon.png" download class="download-pill primary">Download</a>
+        </div>
+
+        <div class="platform-card">
+          <div class="platform-card-info">
+            <div class="platform-card-name">android-chrome-192x192.png</div>
+            <div class="platform-card-meta">192×192 px (Android / PWA)</div>
+          </div>
+          <a href="./icon/exports/web/android-chrome-192x192.png" download class="download-pill primary">Download</a>
+        </div>
+
+        <div class="platform-card">
+          <div class="platform-card-info">
+            <div class="platform-card-name">android-chrome-512x512.png</div>
+            <div class="platform-card-meta">512×512 px (PWA Splash)</div>
+          </div>
+          <a href="./icon/exports/web/android-chrome-512x512.png" download class="download-pill primary">Download</a>
+        </div>
+
+        <div class="platform-card">
+          <div class="platform-card-info">
+            <div class="platform-card-name">AppIcon.icns</div>
+            <div class="platform-card-meta">16–1024 px (macOS bundle)</div>
+          </div>
+          <a href="./icon/exports/macos/AppIcon.icns" download class="download-pill primary">Download</a>
+        </div>
+      </div>
+
+      <!-- HTML Snippet -->
+      <div class="code-box" style="margin-top: 24px;">
+        <button class="code-copy-btn" onclick="copyHtmlSnippet()">Copy HTML</button>
+        <pre id="html-snippet-code"><code>&lt;!-- EasySQL Favicons &amp; Web Manifest --&gt;
+&lt;link rel="icon" type="image/x-icon" href="/favicon.ico"&gt;
+&lt;link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png"&gt;
+&lt;link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png"&gt;
+&lt;link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png"&gt;</code></pre>
+      </div>
+    </section>
+
+    <!-- Interactive Logo Tester -->
+    <section id="tester">
+      <div class="section-header">
+        <span class="tag">Playground</span>
+        <h2>Interactive Asset Tester</h2>
+        <p>Test logo variations across custom background colors and inspect safe zones.</p>
+      </div>
+
+      <div class="playground-box">
+        <div class="playground-controls">
+          <!-- Variation Selector -->
+          <div class="control-group">
+            <label class="control-label" for="logo-select">Logo:</label>
+            <select id="logo-select" class="select-custom" onchange="updatePlayground()">
+              <option value="./logo/exports/svg/01-dark-horizontal.svg">01 · Horizontal (Dark)</option>
+              <option value="./logo/exports/svg/02-light-horizontal.svg">02 · Horizontal (Light)</option>
+              <option value="./logo/exports/svg/03-dark-stacked.svg">03 · Stacked (Dark)</option>
+              <option value="./logo/exports/svg/04-light-stacked.svg">04 · Stacked (Light)</option>
+              <option value="./logo/exports/svg/05-dark-text-only.svg">05 · Wordmark (Dark)</option>
+              <option value="./logo/exports/svg/06-light-text-only.svg">06 · Wordmark (Light)</option>
+              <option value="./logo/exports/svg/01-dark-horizontal-mono.svg">01m · Horizontal (Dark, mono)</option>
+              <option value="./logo/exports/svg/02-light-horizontal-mono.svg">02m · Horizontal (Light, mono)</option>
+              <option value="./logo/exports/svg/03-dark-stacked-mono.svg">03m · Stacked (Dark, mono)</option>
+              <option value="./logo/exports/svg/04-light-stacked-mono.svg">04m · Stacked (Light, mono)</option>
+              <option value="./logo/exports/svg/05-dark-text-only-mono.svg">05m · Wordmark (Dark, mono)</option>
+              <option value="./logo/exports/svg/06-light-text-only-mono.svg">06m · Wordmark (Light, mono)</option>
+              <option value="./icon/exports/svg/07-dark-icon-only.svg">07 · Icon Only (Dark)</option>
+              <option value="./icon/exports/svg/08-light-icon-only.svg">08 · Icon Only (Light)</option>
+            </select>
+          </div>
+
+          <!-- Background Preset Buttons -->
+          <div class="control-group">
+            <span class="control-label">Background:</span>
+            <div class="bg-presets">
+              <button class="bg-preset-btn active" style="background: #0F2B3D;" onclick="setPlaygroundBg('#0F2B3D', this)" title="Petroleum Blue"></button>
+              <button class="bg-preset-btn" style="background: #0B1E2B;" onclick="setPlaygroundBg('#0B1E2B', this)" title="Petroleum Dark"></button>
+              <button class="bg-preset-btn" style="background: #FFFFFF;" onclick="setPlaygroundBg('#FFFFFF', this)" title="White"></button>
+              <button class="bg-preset-btn" style="background: #F8FAFC;" onclick="setPlaygroundBg('#F8FAFC', this)" title="Slate 50"></button>
+              <button class="bg-preset-btn" style="background: #000000;" onclick="setPlaygroundBg('#000000', this)" title="Pure Black"></button>
+              <button class="bg-preset-btn checkerboard" onclick="setPlaygroundBg('checkerboard', this)" title="Transparency Grid"></button>
+            </div>
+          </div>
+
+          <!-- Safe Area Toggle -->
+          <div class="control-group">
+            <label class="control-label" style="cursor: pointer; display: flex; align-items: center; gap: 6px;">
+              <input type="checkbox" id="safe-area-toggle" onchange="toggleSafeArea()">
+              Show Clear Space
+            </label>
+          </div>
+
+          <!-- Size Slider -->
+          <div class="control-group">
+            <span class="control-label">Scale:</span>
+            <input type="range" id="size-slider" min="120" max="440" value="280" oninput="resizePlaygroundLogo(this.value)">
+            <span id="size-display" style="font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--slate-400);">280px</span>
+          </div>
+        </div>
+
+        <!-- Preview Stage -->
+        <div class="playground-stage" id="playground-stage" style="background-color: #0F2B3D;">
+          <div class="playground-logo-wrapper" id="playground-wrapper" style="width: 280px;">
+            <img id="playground-img" src="./logo/exports/svg/01-dark-horizontal.svg" alt="Preview Logo">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Brand Guidelines Summary -->
+    <section id="guidelines">
+      <div class="section-header">
+        <span class="tag">Standards</span>
+        <h2>Brand Usage Guidelines</h2>
+        <p>Preserve brand integrity by maintaining exact colors, padding, and proportions.</p>
+      </div>
+
+      <div class="rules-grid">
+        <div class="rule-card">
+          <h3 style="color: #10B981;">Do’s</h3>
+          <ul class="rule-list">
+            <li><span class="icon-check">✓</span> Use dark variations (01, 03, 05, 07) on dark blue, petroleum, and black backgrounds.</li>
+            <li><span class="icon-check">✓</span> Use light variations (02, 04, 06, 08) on light gray, white, and paper backgrounds.</li>
+            <li><span class="icon-check">✓</span> Keep "Easy" in Space Grotesk and "SQL" in Geist; "SQL" stays #F97316.</li>
+            <li><span class="icon-check">✓</span> Use the monochrome lockups for one-color, small, or light-background reproduction.</li>
+            <li><span class="icon-check">✓</span> Use the 16/24 px small icon cut below 32 px.</li>
+            <li><span class="icon-check">✓</span> Maintain minimum clear space equal to the height of the wordmark letters around the logo.</li>
+            <li><span class="icon-check">✓</span> Always spell the product name as <strong>EasySQL</strong> (CamelCase, no spaces).</li>
+          </ul>
+        </div>
+
+        <div class="rule-card">
+          <h3 style="color: #EF4444;">Don’ts</h3>
+          <ul class="rule-list">
+            <li><span class="icon-cross">✗</span> Do not stretch, skew, or distort the logo aspect ratio.</li>
+            <li><span class="icon-cross">✗</span> Do not alter the orange-to-pink gradient (#F97316 → #F472B6).</li>
+            <li><span class="icon-cross">✗</span> Do not add drop shadows, outer glows, or bevels to the monogram.</li>
+            <li><span class="icon-cross">✗</span> Do not separate "Easy" and "SQL" with a dot, slash, or space.</li>
+            <li><span class="icon-cross">✗</span> Do not invert the "Easy"/"SQL" colors or use the orange SQL at small sizes on white.</li>
+            <li><span class="icon-cross">✗</span> Do not use the standard icon at 16/24 px.</li>
+            <li><span class="icon-cross">✗</span> Do not render "Easy SQL" with a space or all-lowercase.</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+      <div>
+        © 2026 <strong>EasySQL</strong> · A product of <a href="https://clearsoft.net" target="_blank" rel="noopener">Clearsoft</a>. All rights reserved.
+      </div>
+      <div>
+        Source code and brand assets available on <a href="https://github.com/Clearsoft-net/easysql-brand" target="_blank" rel="noopener">GitHub (Clearsoft-net/easysql-brand)</a>.
+        Governed by the <a href="./LICENSE">Clearsoft Brand &amp; Trademark License</a>.
+      </div>
+    </footer>
+  </main>
+
+  <!-- Toast Notification -->
+  <div class="toast" id="toast">
+    <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#F97316" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg>
+    <span id="toast-text">Copied to clipboard!</span>
+  </div>
+
+  <script>
+    // Copy color HEX
+    function copyColor(hex, label) {
+      navigator.clipboard.writeText(hex).then(() => {
+        showToast(`${label} (${hex}) copied!`);
+      });
+    }
+
+
+    // Copy Radius tokens
+    function copyRadiusTokens() {
+      const code = document.getElementById('radius-tokens-code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('Border Radius tokens copied to clipboard!');
+      });
+    }
+
+    // Copy CSS variables
+    function copyCssVars() {
+      const code = document.getElementById('css-vars-code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('CSS Variables copied to clipboard!');
+      });
+    }
+
+    // Copy HTML snippet
+    function copyHtmlSnippet() {
+      const code = document.getElementById('html-snippet-code').innerText;
+      navigator.clipboard.writeText(code).then(() => {
+        showToast('HTML snippet copied to clipboard!');
+      });
+    }
+
+    // Show toast message
+    function showToast(msg) {
+      const toast = document.getElementById('toast');
+      const toastText = document.getElementById('toast-text');
+      toastText.innerText = msg;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 2500);
+    }
+
+    // Change playground background
+    function setPlaygroundBg(bg, btn) {
+      const stage = document.getElementById('playground-stage');
+      stage.className = 'playground-stage';
+      if (bg === 'checkerboard') {
+        stage.classList.add('checkerboard');
+        stage.style.backgroundColor = '';
+      } else {
+        stage.style.backgroundColor = bg;
+      }
+
+      document.querySelectorAll('.bg-preset-btn').forEach(b => b.classList.remove('active'));
+      if (btn) btn.classList.add('active');
+    }
+
+    // Change playground logo
+    function updatePlayground() {
+      const select = document.getElementById('logo-select');
+      const img = document.getElementById('playground-img');
+      img.src = select.value;
+    }
+
+    // Toggle safe clear space
+    function toggleSafeArea() {
+      const wrapper = document.getElementById('playground-wrapper');
+      const toggle = document.getElementById('safe-area-toggle');
+      if (toggle.checked) {
+        wrapper.classList.add('show-safe-area');
+      } else {
+        wrapper.classList.remove('show-safe-area');
+      }
+    }
+
+    // Resize playground logo
+    function resizePlaygroundLogo(val) {
+      const wrapper = document.getElementById('playground-wrapper');
+      const display = document.getElementById('size-display');
+      wrapper.style.width = val + 'px';
+      display.innerText = val + 'px';
+    }
+
+    // Mobile sidebar toggle
+    function toggleSidebar() {
+      const sidebar = document.getElementById('sidebar');
+      sidebar.classList.toggle('open');
+    }
+
+    // Close mobile sidebar when clicking a link
+    document.querySelectorAll('.sidebar-link').forEach(link => {
+      link.addEventListener('click', () => {
+        if (window.innerWidth <= 960) {
+          document.getElementById('sidebar').classList.remove('open');
+        }
+      });
+    });
+
+    // Scrollspy with IntersectionObserver
+    const navLinks = document.querySelectorAll('.sidebar-link');
+    const sections = Array.from(document.querySelectorAll('main > section'));
+
+    const observerOptions = {
+      root: null,
+      rootMargin: '-20% 0px -60% 0px',
+      threshold: 0
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.getAttribute('id');
+          navLinks.forEach(link => {
+            if (link.getAttribute('data-section') === id) {
+              link.classList.add('active');
+            } else {
+              link.classList.remove('active');
+            }
+          });
+        }
+      });
+    }, observerOptions);
+
+    sections.forEach(section => observer.observe(section));
+  </script>
+</body>
+</html>
