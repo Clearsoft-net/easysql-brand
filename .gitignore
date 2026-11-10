@@ -4,6 +4,9 @@ skills/
 # Proposal/comparison material (not part of the kit)
 variants/
 
+# Browser tooling scratch (agent screenshots)
+.playwright-mcp/
+
 # Python bytecode
 __pycache__/
 *.pyc
