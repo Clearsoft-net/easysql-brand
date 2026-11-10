@@ -1,0 +1,13 @@
+{
+  "fps": 25,
+  "loaders": [
+    { "name": "01-orbit", "width": 96, "height": 96, "duration": 1.2, "loopStart": 0 },
+    { "name": "02-e-assemble", "width": 192, "height": 192, "duration": 1.8, "loopStart": 0.36 },
+    { "name": "02-e-assemble-light", "width": 192, "height": 192, "duration": 1.8, "loopStart": 0.36 },
+    { "name": "03-query-bar-dark", "width": 400, "height": 16, "duration": 1.4, "loopStart": 0 },
+    { "name": "03-query-bar-light", "width": 400, "height": 16, "duration": 1.4, "loopStart": 0 },
+    { "name": "04-dots", "width": 120, "height": 40, "duration": 1.2, "loopStart": 0.24 },
+    { "name": "05-splash-dark", "width": 320, "height": 320, "duration": 1.4, "loopStart": 0 },
+    { "name": "05-splash-light", "width": 320, "height": 320, "duration": 1.4, "loopStart": 0 }
+  ]
+}

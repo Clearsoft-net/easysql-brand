@@ -1,0 +1,27 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 48 48" width="48" height="48" role="img">
+  <title>EasySQL loading</title>
+  <defs>
+    <linearGradient id="brand" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#F97316"/>
+      <stop offset="1" stop-color="#F472B6"/>
+    </linearGradient>
+  </defs>
+  <style>
+    .orbit {
+      transform-box: view-box;
+      transform-origin: 24px 24px;
+      transform: rotate(-90deg);
+      animation: orbit-spin 1.2s linear infinite;
+    }
+    @keyframes orbit-spin {
+      from { transform: rotate(-90deg); }
+      to { transform: rotate(270deg); }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      .orbit { animation: none; }
+    }
+  </style>
+  <g class="orbit" transform="rotate(-90 24 24)">
+    <circle cx="24" cy="24" r="19" fill="none" stroke="url(#brand)" stroke-width="5" stroke-linecap="round" stroke-dasharray="56 63.3805"/>
+  </g>
+</svg>
