@@ -34,10 +34,15 @@ icon/
   exports/macos/AppIcon.icns    macOS icon
 scripts/export.py               PNG/ICO/ICNS export pipeline
 scripts/outline.py              Text-to-path step (source -> exports/svg)
-index.html                      Local brand showcase (not part of the published kit)
+index.html                      Static brand showcase (site entry point)
 ```
 
 `variants/` is gitignored scratch for design comparisons; do not commit it.
+
+The repository is served as a static site from the root, with `index.html` as
+the entry point. Download links use relative paths; each one gets a copy-URL
+button that resolves the absolute URL at runtime, so keep new asset links
+relative to preserve the hosting origin in copied URLs.
 
 ## Build
 
