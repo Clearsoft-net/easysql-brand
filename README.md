@@ -35,6 +35,7 @@ The gradient visually connects EasySQL to its parent company, [Clearsoft](https:
 * **Secondary text:** `#94A3B8` (Dark) / `#64748B` (Light)
 * **Wordmark accent ("SQL"):** `#F97316` (Orange), in both modes
 * **Wordmark type:** Space Grotesk Bold (700) for "Easy", Geist Bold (700) for "SQL"; the "E" monogram stays Inter ExtraBold
+* **Light background:** the orange "SQL" is intended for display sizes; use the monochrome lockups for small sizes or one-color/print reproduction.
 
 ### Recommended Backgrounds
 * **Dark Background (Product):** `#0F2B3D` (Petroleum Blue) or `#0B1E2B`

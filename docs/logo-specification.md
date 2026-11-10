@@ -25,6 +25,8 @@ The orange→pink gradient is the same Clearsoft accent, tying the brand to its 
 
 "SQL" uses the same orange in both modes; "Easy" follows the text color.
 
+On light backgrounds, use the monochrome lockups for small sizes or one-color/print reproduction; the orange "SQL" is intended for display sizes.
+
 ### Backgrounds
 
 | Context | Color |
@@ -146,6 +148,7 @@ Below these sizes, use the icon only (07/08). The 16/24 px exports use the small
 - ❌ Don't write "Easy SQL" with a space — it is "EasySQL"
 - ❌ Don't separate "Easy" and "SQL" with a dot, slash, or space — the distinction is color
 - ❌ Don't invert the colors: "Easy" uses the text color and "SQL" uses `#F97316`
+- ❌ Don't use the orange "SQL" at small sizes on light backgrounds — use the monochrome lockup
 - ❌ Don't use the Clearsoft gradient as the main background color (accents only)
 
 ---
