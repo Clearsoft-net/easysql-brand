@@ -35,6 +35,18 @@ LOGO_SOURCES = (
     "06-light-text-only-mono",
 )
 ICON_SOURCES = ("07-dark-icon-only", "08-light-icon-only")
+SMALL_ICON_SOURCES = {
+    "07-dark-icon-only": "07-dark-icon-small",
+    "08-light-icon-only": "08-light-icon-small",
+}
+SMALL_ICON_SIZES = (16, 24)
+SMALL_ICO_SIZES = (16, 20, 24)
+
+
+def icon_source(name, size, small_sizes):
+    if size in small_sizes:
+        return ROOT / "icon/exports/svg" / f"{SMALL_ICON_SOURCES[name]}.svg"
+    return ROOT / "icon/exports/svg" / f"{name}.svg"
 
 LOGO_SCALES = (1, 2, 3)
 LOGO_BORDER = 8
@@ -174,21 +186,19 @@ def build_logos():
 
 def build_icons():
     for name in ICON_SOURCES:
-        svg = ROOT / "icon/exports/svg" / f"{name}.svg"
         for size in ICON_SIZES:
             out = ROOT / "icon/exports/png" / f"{size}x{size}" / f"{name}.png"
-            render(svg, out, size)
+            render(icon_source(name, size, SMALL_ICON_SIZES), out, size)
             print(f"icon    {out.relative_to(ROOT)}")
 
 
 def build_ico():
     for name in ICON_SOURCES:
-        svg = ROOT / "icon/exports/svg" / f"{name}.svg"
         with tempfile.TemporaryDirectory() as tmp:
             blobs = []
             for size in ICO_SIZES:
                 frame = Path(tmp) / f"{size}.png"
-                render(svg, frame, size, depth=8)
+                render(icon_source(name, size, SMALL_ICO_SIZES), frame, size, depth=8)
                 blobs.append((size, frame.read_bytes()))
         out = ROOT / "icon/exports/ico" / f"{name}.ico"
         out.parent.mkdir(parents=True, exist_ok=True)
@@ -203,7 +213,7 @@ def build_platform():
 
     for size in FAVICON_SIZES:
         out = web / f"favicon-{size}x{size}.png"
-        render(dark, out, size)
+        render(icon_source("07-dark-icon-only", size, (16,)), out, size)
         print(f"web     {out.relative_to(ROOT)}")
 
     with tempfile.TemporaryDirectory() as tmp:
@@ -229,13 +239,12 @@ def build_platform():
 
 
 def build_macos():
-    svg = ROOT / "icon/exports/svg" / "07-dark-icon-only.svg"
     with tempfile.TemporaryDirectory() as tmp:
         frames = {}
         for _, size in ICNS_TYPES:
             if size not in frames:
                 frame = Path(tmp) / f"{size}.png"
-                render(svg, frame, size, depth=8)
+                render(icon_source("07-dark-icon-only", size, (16,)), frame, size, depth=8)
                 frames[size] = frame.read_bytes()
     out = ROOT / "icon/exports/macos/AppIcon.icns"
     out.parent.mkdir(parents=True, exist_ok=True)

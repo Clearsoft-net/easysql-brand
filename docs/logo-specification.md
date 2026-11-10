@@ -110,6 +110,8 @@ The shipped SVGs in `logo/exports/svg/` and `icon/exports/svg/` are outlined; th
 
 08 (light) adds an `#E2E8F0` ring around the tile so it sits well on light backgrounds.
 
+For 16 and 24 px there is a dedicated small-size cut: the tile fills the canvas and the E is drawn on a 2 px grid for legibility.
+
 > The dimensions above are the SVG viewBox. Logo PNGs are cropped to the content with `-trim +repage -bordercolor none -border`, with a transparent border of 8 px at 1× (16 px at 2× and 24 px at 3×), so the exported PNG does not have the viewBox size. Icons keep the full canvas because their sizes are absolute.
 
 ---
@@ -130,7 +132,7 @@ The shipped SVGs in `logo/exports/svg/` and `icon/exports/svg/` are outlined; th
 | Text only (05/06) | 120px width |
 | Icon only (07/08) | 24px (favicon) |
 
-Below these sizes, use the icon only (07/08).
+Below these sizes, use the icon only (07/08). The 16/24 px exports use the small-size cut.
 
 ---
 
@@ -168,6 +170,8 @@ Editable text sources: `logo/source/` (logos, with monochrome versions as `*-mon
 | `logo/exports/svg/06-light-text-only-mono.svg` | Wordmark only — monochrome, light background |
 | `icon/exports/svg/07-dark-icon-only.svg` | E monogram only — dark background |
 | `icon/exports/svg/08-light-icon-only.svg` | E monogram only — light background (#E2E8F0 ring) |
+| `icon/exports/svg/07-dark-icon-small.svg` | 16/24 px icon cut — dark background |
+| `icon/exports/svg/08-light-icon-small.svg` | 16/24 px icon cut — light background |
 
 > `logo/exports/svg/02-light-horizontal-bg.svg` is the 02 variant with a forced white background (outlined SVG; no raster exports). The editable text version is `logo/source/02-light-horizontal-bg.svg`.
 
