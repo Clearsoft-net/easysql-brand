@@ -571,6 +571,50 @@
       border-color: var(--brand-orange);
     }
 
+    .download-action {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+    }
+
+    .copy-url-btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 32px;
+      height: 32px;
+      padding: 0;
+      border-radius: 6px;
+      background: rgba(255, 255, 255, 0.06);
+      color: var(--slate-400);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .copy-url-btn:hover {
+      background: rgba(255, 255, 255, 0.15);
+      color: var(--white);
+      border-color: rgba(255, 255, 255, 0.25);
+    }
+
+    .copy-url-btn:focus-visible {
+      outline: 2px solid var(--brand-orange);
+      outline-offset: 2px;
+    }
+
+    .copy-url-btn.copied {
+      background: rgba(16, 185, 129, 0.12);
+      border-color: rgba(16, 185, 129, 0.5);
+      color: #10B981;
+    }
+
+    .copy-url-btn svg {
+      width: 15px;
+      height: 15px;
+      pointer-events: none;
+    }
+
     /* Platform Drop-in Cards */
     .platform-grid {
       display: grid;
@@ -585,9 +629,13 @@
       border-radius: var(--radius-md);
       padding: 16px;
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
+      align-items: stretch;
       gap: 12px;
+    }
+
+    .platform-card .download-action {
+      align-self: flex-end;
     }
 
     .platform-card-info {
@@ -1564,6 +1612,7 @@
               <option value="./icon/exports/svg/07-dark-icon-only.svg">07 · Icon Only (Dark)</option>
               <option value="./icon/exports/svg/08-light-icon-only.svg">08 · Icon Only (Light)</option>
             </select>
+            <button type="button" id="playground-copy-url" class="copy-url-btn" title="Copy URL of the selected asset" aria-label="Copy URL of the selected asset"></button>
           </div>
 
           <!-- Background Preset Buttons -->
@@ -1691,6 +1740,106 @@
         showToast('HTML snippet copied to clipboard!');
       });
     }
+
+    // Copy text with a fallback for browsers without the async clipboard API
+    async function copyText(text) {
+      if (navigator.clipboard && window.isSecureContext) {
+        try {
+          await navigator.clipboard.writeText(text);
+          return;
+        } catch {
+          // Fall through to the legacy path
+        }
+      }
+
+      const area = document.createElement('textarea');
+      area.value = text;
+      area.setAttribute('readonly', '');
+      area.style.position = 'fixed';
+      area.style.top = '-9999px';
+      document.body.appendChild(area);
+      area.select();
+      area.setSelectionRange(0, area.value.length);
+      const copied = document.execCommand('copy');
+      area.remove();
+      if (!copied) throw new Error('Copy command was rejected');
+    }
+
+    const copyIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>';
+    const checkIconSvg = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><polyline points="20 6 9 17 4 12"/></svg>';
+
+    function setCopyFeedback(button, copied) {
+      button.classList.toggle('copied', copied);
+      button.innerHTML = copied ? checkIconSvg : copyIconSvg;
+    }
+
+    function flashCopyFeedback(button) {
+      clearTimeout(button.copyFeedbackTimer);
+      setCopyFeedback(button, true);
+      button.copyFeedbackTimer = setTimeout(() => setCopyFeedback(button, false), 1600);
+    }
+
+    function copyAssetUrl(url, label, button) {
+      copyText(url).then(() => {
+        showToast(`${label} URL copied!`);
+        if (button) flashCopyFeedback(button);
+      }).catch(() => {
+        showToast(`Could not copy ${label} URL`);
+      });
+    }
+
+    // Add an icon-only copy button next to every asset download link
+    function setupCopyUrlButtons() {
+      document.querySelectorAll('.asset-downloads .download-pill, .platform-card .download-pill').forEach(link => {
+        if (link.parentElement.classList.contains('download-action')) return;
+
+        const url = link.href;
+        const name = decodeURIComponent(url.split('/').pop());
+        const pillLabel = link.textContent.trim();
+        const label = pillLabel.toLowerCase() === 'download' ? name : `${pillLabel} (${name})`;
+        const action = document.createElement('span');
+        action.className = 'download-action';
+        link.parentElement.insertBefore(action, link);
+        action.appendChild(link);
+
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'copy-url-btn';
+        button.innerHTML = copyIconSvg;
+        button.title = `Copy URL: ${url}`;
+        button.setAttribute('aria-label', `Copy URL of ${label}`);
+        button.addEventListener('click', () => copyAssetUrl(url, label, button));
+        action.appendChild(button);
+      });
+    }
+
+    // Copy the URL of the asset currently shown in the playground
+    function setupPlaygroundCopyButton() {
+      const button = document.getElementById('playground-copy-url');
+      const select = document.getElementById('logo-select');
+      if (!button || !select) return;
+
+      button.innerHTML = copyIconSvg;
+
+      const sync = () => {
+        const url = new URL(select.value, document.baseURI).href;
+        const label = select.options[select.selectedIndex].text;
+        button.title = `Copy URL: ${url}`;
+        button.setAttribute('aria-label', `Copy URL of ${label}`);
+      };
+
+      select.addEventListener('change', sync);
+      sync();
+
+      button.addEventListener('click', () => {
+        const label = select.options[select.selectedIndex].text;
+        const url = new URL(select.value, document.baseURI).href;
+        copyAssetUrl(url, label, button);
+      });
+    }
+
+    setupCopyUrlButtons();
+    setupPlaygroundCopyButton();
 
     // Show toast message
     function showToast(msg) {
