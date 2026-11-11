@@ -19,6 +19,7 @@ from pathlib import Path
 from fontTools.pens.boundsPen import BoundsPen
 from fontTools.pens.svgPathPen import SVGPathPen
 from fontTools.pens.transformPen import TransformPen
+from fontTools.svgLib.path import parse_path
 from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parent.parent
@@ -33,6 +34,7 @@ TSPAN_RE = re.compile(r"<tspan ([^>]*)>(.*?)</tspan>", re.S)
 FAMILY_RE = re.compile(r"'([^']+)'|\"([^\"]+)\"")
 RECT_RE = re.compile(r"  <rect ([^>]*)/>")
 POLYGON_RE = re.compile(r"  <polygon ([^>]*)/>")
+PATH_RE = re.compile(r"  <path ([^>]*)/>")
 SVG_RE = re.compile(r"<svg ([^>]*)>")
 
 
@@ -190,6 +192,15 @@ def polygon_bounds(attrs):
     return (min(xs), min(ys), max(xs), max(ys))
 
 
+def path_bounds(attrs):
+    d = attrs.get("d")
+    if not d:
+        return None
+    pen = BoundsPen(None)
+    parse_path(d, pen)
+    return pen.bounds
+
+
 def outline_svg(text, padding=None):
     bounds = None
 
@@ -210,6 +221,8 @@ def outline_svg(text, padding=None):
         bounds = merge_bounds(bounds, rect_bounds(dict(ATTR_RE.findall(match.group(1)))))
     for match in POLYGON_RE.finditer(text):
         bounds = merge_bounds(bounds, polygon_bounds(dict(ATTR_RE.findall(match.group(1)))))
+    for match in PATH_RE.finditer(text):
+        bounds = merge_bounds(bounds, path_bounds(dict(ATTR_RE.findall(match.group(1)))))
     if bounds is None:
         raise SystemExit("cannot crop: no artwork bounds")
 

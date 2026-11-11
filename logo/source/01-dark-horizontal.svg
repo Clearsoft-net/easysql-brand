@@ -5,7 +5,7 @@
       <stop offset="1" stop-color="#F472B6"/>
     </linearGradient>
   </defs>
-  <rect x="12" y="24" width="72" height="72" rx="16" fill="url(#g1)"/>
+  <path d="M48 24C69 24 81.75 30 83.25 42C83.75 46.5 84 53.25 84 60C84 66.75 83.75 73.5 83.25 78C81.75 90 69 96 48 96C27 96 14.25 90 12.75 78C12.25 73.5 12 66.75 12 60C12 53.25 12.25 46.5 12.75 42C14.25 30 27 24 48 24Z" fill="url(#g1)"/>
   <text x="48" y="60" text-anchor="middle" dominant-baseline="central" font-family="'Inter', system-ui, sans-serif" font-size="46" font-weight="800" fill="#FFFFFF">E</text>
   <text x="99.57" y="73.1" font-family="'Space Grotesk', system-ui, sans-serif" font-size="37.41" font-weight="700" fill="#F1F5F9"><tspan fill="#F1F5F9">Easy</tspan><tspan dx="-1" font-family="'Geist', system-ui, sans-serif" font-size="36.89" font-weight="700" fill="#F97316">SQL</tspan></text>
 </svg>
