@@ -1,6 +1,6 @@
 # EasySQL — Logo Specification
 
-> Brand usage guide · Version 1.4
+> Brand usage guide · Version 1.5
 > A Clearsoft Product
 
 ---
@@ -70,7 +70,7 @@ The shipped SVGs in `logo/exports/svg/` and `icon/exports/svg/` are outlined; th
 
 | Element | Size | Reference |
 |---|---|---|
-| Monogram tile | 72×72 | gradient, rx=16 |
+| Monogram tile | 72×72 | gradient, smooth barrel cylinder (G2 continuous curve) |
 | **E** | 46px | centered in the tile |
 | "EasySQL" | "Easy" 37.4px · "SQL" 36.9px | "Easy" in the text color; "SQL" in `#F97316` |
 
@@ -142,21 +142,23 @@ Below these sizes, use the icon only (07/08). The 16/24 px exports use the small
 
 ---
 
-## 6. Border Radius & Corner Geometry
+## 6. Tile Geometry & Border Radius
 
-The corner radius of EasySQL brand elements derives from the official monogram tile geometry: **72×72 px** with **`rx = 16px`**, establishing the official **Tile Ratio** of **~22.2%** ($R \approx 0.222 \times \text{size}$).
+The official monogram tile uses a **Smooth Barrel Cylinder** silhouette (**72×72 px** with G2 continuous elliptical caps and gently curved sides), evoking a database storage drum without sharp shoulder transitions.
 
-### Brand Tile Ratio (Squircle Geometry)
-For any square brand container, app icon, or tile:
+For rectangular UI containers, cards, and layout surfaces, corner radii derive from the **~22.2%** brand ratio ($R \approx 0.222 \times \text{size}$, or `16px` at `72×72 px`).
 
-| Tile Size | Corner Radius | Application |
+### Brand Container Ratio (~22.2%)
+For any square UI container or card surface:
+
+| Container Size | Corner Radius | Application |
 |---|---|---|
 | **16×16 px** | `3.5px` | Browser favicon (small-size cut) |
 | **24×24 px** | `5px` | Compact menus, icon buttons |
 | **32×32 px** | `7px` | Toolbar items, small avatars |
 | **48×48 px** | `10px` | Integration cards, database connectors |
 | **64×64 px** | `14px` | Feature highlights, dialogs |
-| **72×72 px** | `16px` | **Official monogram tile (Logos 01–04, 07, 08)** |
+| **72×72 px** | `16px` | **Reference brand container scale (Logos 01–04, 07, 08)** |
 | **128×128 px** | `28px` | Web store listing, splash screen |
 | **256×256 px** | `56px` | Desktop app icon (macOS / Windows) |
 | **512×512 px** | `112px` | PWA splash, App Store listing |
@@ -237,7 +239,7 @@ Editable text sources: `logo/source/` (logos, including the opaque-background an
 
 > Opaque-background variants (01/03/05 dark, 02/04/06 light) are outlined SVGs only, with no raster exports. The editable sources live in `logo/source/*-bg.svg` and use the distribution crop viewBox (261×88, 145×130, 181×53) so the opaque canvas matches the export.
 
-> The final product icon (speech bubble→DB, E-prompt, or ?→table) is defined in a later phase. For now the "E" monogram is the official marker (favicon/app icon).
+> The monogram tile uses the Smooth Barrel Cylinder geometry (G2 continuous database drum silhouette) paired with the Inter ExtraBold "E".
 
 ---
 
@@ -249,7 +251,7 @@ Loaders are transient UI states, not decoration. They may animate the gradient o
 
 - The moving element uses the brand gradient `#F97316` → `#F472B6` only. Never recolor it.
 - Bar tracks use `#F1F5F9` at 14% opacity on dark backgrounds and `#E2E8F0` on light backgrounds.
-- Monogram loaders use the official 72×72 tile (`rx=16`) and the white Inter ExtraBold E. The light variants keep the `#E2E8F0` ring used by icon 08.
+- Monogram loaders use the official 72×72 barrel cylinder tile and the white Inter ExtraBold E. The light variants keep the `#E2E8F0` ring used by icon 08.
 - No shadows, glows, blurs, bevels, extra colors, or filters.
 
 ### Motion

@@ -7,7 +7,7 @@
     </linearGradient>
   </defs>
   <g transform="translate(20 20) scale(0.7777778) translate(-4 -4)">
-    <rect x="4" y="4" width="72" height="72" rx="16" fill="url(#brand)"/>
+    <path d="M40 4C61 4 73.75 10 75.25 22C75.75 26.5 76 33.25 76 40C76 46.75 75.75 53.5 75.25 58C73.75 70 61 76 40 76C19 76 6.25 70 4.75 58C4.25 53.5 4 46.75 4 40C4 33.25 4.25 26.5 4.75 22C6.25 10 19 4 40 4Z" fill="url(#brand)"/>
     <rect class="stem" x="29.0752" y="23.9941" width="7.584" height="32.0118"/>
     <rect class="arm-top" x="36.6592" y="23.9941" width="14.6308" height="6.1875"/>
     <rect class="arm-mid" x="36.6592" y="36.7988" width="13.4707" height="6.0586"/>

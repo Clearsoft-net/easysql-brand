@@ -1,9 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80 80" width="80" height="80">
   <defs>
     <mask id="knockout">
-      <rect x="4" y="4" width="72" height="72" rx="16" fill="#FFFFFF"/>
+      <path d="M40 4C61 4 73.75 10 75.25 22C75.75 26.5 76 33.25 76 40C76 46.75 75.75 53.5 75.25 58C73.75 70 61 76 40 76C19 76 6.25 70 4.75 58C4.25 53.5 4 46.75 4 40C4 33.25 4.25 26.5 4.75 22C6.25 10 19 4 40 4Z" fill="#FFFFFF"/>
       <text x="40" y="40" text-anchor="middle" dominant-baseline="central" font-family="'Inter', system-ui, sans-serif" font-size="44" font-weight="800" fill="#000000">E</text>
     </mask>
   </defs>
-  <rect x="4" y="4" width="72" height="72" rx="16" fill="#0F172A" mask="url(#knockout)"/>
+  <path d="M40 4C61 4 73.75 10 75.25 22C75.75 26.5 76 33.25 76 40C76 46.75 75.75 53.5 75.25 58C73.75 70 61 76 40 76C19 76 6.25 70 4.75 58C4.25 53.5 4 46.75 4 40C4 33.25 4.25 26.5 4.75 22C6.25 10 19 4 40 4Z" fill="#0F172A" mask="url(#knockout)"/>
 </svg>
