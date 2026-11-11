@@ -10,9 +10,10 @@ export MAGICK
 EXPORT = $(PYTHON) scripts/export.py
 
 .DEFAULT_GOAL := all
-.PHONY: all logos icons ico platform macos outline check clean
+.PHONY: all logos icons ico platform macos outline loaders animated check-animated check clean
 
 all:
+	$(PYTHON) scripts/loaders.py
 	$(EXPORT) all
 
 logos:
@@ -33,8 +34,17 @@ macos:
 outline:
 	$(PYTHON) scripts/outline.py
 
+loaders:
+	$(PYTHON) scripts/loaders.py
+
+animated:
+	node scripts/loaders_animated.mjs
+
+check-animated:
+	$(PYTHON) scripts/check_animated.py
+
 check:
 	$(EXPORT) check
 
 clean:
-	rm -rf logo/exports/svg logo/exports/png icon/exports/svg icon/exports/png icon/exports/ico icon/exports/web icon/exports/macos
+	rm -rf logo/exports/svg logo/exports/png icon/exports/svg icon/exports/png icon/exports/ico icon/exports/web icon/exports/macos loaders/static loaders/exports

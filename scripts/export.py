@@ -16,6 +16,7 @@ import subprocess
 import sys
 import tempfile
 from pathlib import Path
+from xml.etree import ElementTree
 
 ROOT = Path(__file__).resolve().parent.parent
 MAGICK = os.environ.get("MAGICK", "magick")
@@ -41,6 +42,22 @@ SMALL_ICON_SOURCES = {
 }
 SMALL_ICON_SIZES = (16, 24)
 SMALL_ICO_SIZES = (16, 20, 24)
+
+LOADER_SOURCES = (
+    "01-orbit",
+    "02-e-assemble",
+    "02-e-assemble-light",
+    "03-query-bar-dark",
+    "03-query-bar-light",
+    "04-dots",
+    "05-splash-dark",
+    "05-splash-light",
+)
+LOADER_DIR = ROOT / "loaders"
+LOADER_STATIC_DIR = LOADER_DIR / "static"
+LOADER_GRADIENT = {"#F97316", "#F472B6"}
+LOADER_FORBIDDEN = {"text", "script", "image", "foreignObject", "filter"}
+LOADER_STYLE_RE = re.compile(r"  <style>.*?</style>\n", re.S)
 
 
 def icon_source(name, size, small_sizes):
@@ -252,6 +269,82 @@ def build_macos():
     print(f"macos   {out.relative_to(ROOT)}")
 
 
+def local_tag(tag):
+    return tag.rsplit("}", 1)[-1]
+
+
+def loader_structure_errors(path, animated):
+    """Validate one loader SVG: no text/scripts/filters, brand gradient, CSS rules."""
+    try:
+        root = ElementTree.parse(path).getroot()
+    except ElementTree.ParseError as exc:
+        return [f"{path.relative_to(ROOT)}: {exc}"]
+
+    relative = path.relative_to(ROOT)
+    errors = []
+    if not all(root.get(attr) for attr in ("viewBox", "width", "height")):
+        errors.append(f"{relative}: missing viewBox/width/height")
+
+    tags = {local_tag(element.tag) for element in root.iter()}
+    for tag in sorted(tags & LOADER_FORBIDDEN):
+        errors.append(f"{relative}: forbidden <{tag}>")
+
+    stops = {
+        element.get("stop-color")
+        for element in root.iter()
+        if local_tag(element.tag) == "stop"
+    }
+    if stops != LOADER_GRADIENT:
+        errors.append(f"{relative}: gradient stops {sorted(stops)}")
+
+    style = "".join(
+        element.text or ""
+        for element in root.iter()
+        if local_tag(element.tag) == "style"
+    )
+    if animated:
+        if "prefers-reduced-motion: reduce" not in style:
+            errors.append(f"{relative}: missing reduced-motion rule")
+        if "@keyframes" not in style:
+            errors.append(f"{relative}: missing @keyframes")
+    elif style:
+        errors.append(f"{relative}: static poster contains CSS")
+
+    for element in root.iter():
+        for attr, value in element.attrib.items():
+            if attr.startswith("xmlns"):
+                continue
+            if "http://" in value or "https://" in value:
+                errors.append(f"{relative}: external reference {attr}={value}")
+                break
+    return errors
+
+
+def check_loaders():
+    errors = []
+    for name in LOADER_SOURCES:
+        source = LOADER_DIR / f"{name}.svg"
+        static = LOADER_STATIC_DIR / f"{name}-static.svg"
+        if not source.exists():
+            errors.append(f"missing {source.relative_to(ROOT)}")
+            continue
+        errors.extend(loader_structure_errors(source, animated=True))
+        if not static.exists():
+            errors.append(f"missing {static.relative_to(ROOT)}")
+            continue
+        errors.extend(loader_structure_errors(static, animated=False))
+        expected, count = LOADER_STYLE_RE.subn("", source.read_text(encoding="utf-8"))
+        if count != 1:
+            errors.append(
+                f"{source.relative_to(ROOT)}: expected one <style> block, found {count}"
+            )
+        elif static.read_text(encoding="utf-8") != expected:
+            errors.append(
+                f"{static.relative_to(ROOT)}: stale; run python3 scripts/loaders.py"
+            )
+    return errors
+
+
 def check():
     errors = []
     checked = 0
@@ -312,6 +405,9 @@ def check():
         errors.append("missing icon/exports/macos/AppIcon.icns")
     elif tuple(icns_types(icns)) != tuple(chunk_type for chunk_type, _ in ICNS_TYPES):
         errors.append(f"AppIcon.icns: chunks {icns_types(icns)}")
+
+    errors.extend(check_loaders())
+    checked += len(LOADER_SOURCES) * 2
 
     if errors:
         for error in errors:

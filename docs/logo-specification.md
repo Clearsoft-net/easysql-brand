@@ -1,6 +1,6 @@
 # EasySQL — Logo Specification
 
-> Brand usage guide · Version 1.0
+> Brand usage guide · Version 1.2
 > A Clearsoft Product
 
 ---
@@ -216,3 +216,85 @@ Editable text sources: `logo/source/` (logos, with monochrome versions as `*-mon
 > `logo/exports/svg/02-light-horizontal-bg.svg` is the 02 variant with a forced white background (outlined SVG; no raster exports). The editable text version is `logo/source/02-light-horizontal-bg.svg`.
 
 > The final thematic icon (speech bubble→DB, E-prompt, or ?→table) is defined in a later phase. For now the "E" monogram is the official marker (favicon/app icon).
+
+---
+
+## 8. Loaders
+
+Loaders are transient UI states, not decoration. They may animate the gradient or reveal the E; they must not alter the mark.
+
+### Construction
+
+- The moving element uses the brand gradient `#F97316` → `#F472B6` only. Never recolor it.
+- Bar tracks use `#F1F5F9` at 14% opacity on dark backgrounds and `#E2E8F0` on light backgrounds.
+- Monogram loaders use the official 72×72 tile (`rx=16`) and the white Inter ExtraBold E. The light variants keep the `#E2E8F0` ring used by icon 08.
+- No shadows, glows, blurs, bevels, extra colors, or filters.
+
+### Motion
+
+| Loader | Duration | Easing | Notes |
+|---|---|---|---|
+| 01 Orbit | 1.2 s | linear | Continuous rotation; gradient arc, no track. |
+| 02 E-assemble | 1.8 s | ease-in-out | The tile stays static; the E stays whole and its arms brighten in sequence. |
+| 03 Query bar | 1.4 s | cubic-bezier(.45, 0, .2, 1) | Indeterminate segment across a neutral track. |
+| 04 Dots | 1.2 s | ease-in-out | 120 ms stagger. |
+| 05 Splash | 1.4 s | cubic-bezier(.45, 0, .2, 1) | Tile + query bar; app boot only. |
+
+- One loader per view. Do not bounce, overshoot, or use elastic easing.
+- Keep the E upright. Never rotate or distort the monogram.
+- Do not use the wordmark as a spinner.
+- Pause the loader when the state resolves; do not leave an indeterminate animation running behind content.
+
+### Formats
+
+- **SVG** — the source and the resolution-independent choice. Transparent background, CSS animation, no fonts or scripts.
+- **WebP** — 2×, 25 fps, animated WebP with alpha. **Default for loaders in UI**: works as `<img>`, loops natively and is supported in Safari 16+.
+- **GIF** — 2×, 25 fps, transparent. 256 colors and 1-bit alpha; compatibility fallback only.
+
+The animated formats do not carry the SVG's reduced-motion media query. Swap in the static poster with `<picture>` when `prefers-reduced-motion: reduce` matches. Generate with `make animated`; validate with `make check-animated`.
+
+```html
+<!-- Default: WebP with a static poster for reduced motion -->
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="loaders/static/01-orbit-static.svg">
+  <img src="loaders/exports/webp/01-orbit.webp" width="96" height="96" alt="">
+</picture>
+```
+
+### Reduced motion
+
+Every animated loader has a static poster in `loaders/static/`. Use `<picture>` (or the host's motion check) to swap the poster when `prefers-reduced-motion: reduce` matches. The animated files also carry the media query, but browsers do not consistently apply it to SVG loaded as `<img>`. The GIF/WebP exports do not carry the media query; pause or swap them in the host.
+
+```html
+<picture>
+  <source media="(prefers-reduced-motion: reduce)" srcset="static/01-orbit-static.svg">
+  <img src="01-orbit.svg" width="48" height="48" alt="">
+</picture>
+```
+
+### Sizes and backgrounds
+
+- 01 Orbit: 16–64 px; dark/product backgrounds. On white, use 02/05 or the monochrome lockup.
+- 02 E-assemble: 48–160 px; light and dark (light variant with ring).
+- 03 Query bar: full width; use the dark/light track.
+- 04 Dots: 16–40 px tall; pair with text.
+- 05 Splash: 120–240 px wide; app boot only.
+- Minimum 16 px. Below that, use the static small-size icon cut instead.
+
+### Files
+
+| File | Description |
+|---|---|
+| `loaders/01-orbit.svg` | Gradient arc spinner |
+| `loaders/02-e-assemble.svg` | E-assemble, dark |
+| `loaders/02-e-assemble-light.svg` | E-assemble, light (ring) |
+| `loaders/03-query-bar-dark.svg` | Query bar, dark track |
+| `loaders/03-query-bar-light.svg` | Query bar, light track |
+| `loaders/04-dots.svg` | Three-dot inline loader |
+| `loaders/05-splash-dark.svg` | Splash composition, dark |
+| `loaders/05-splash-light.svg` | Splash composition, light |
+| `loaders/static/*.svg` | Static posters for reduced motion |
+| `loaders/exports/gif/*.gif` | GIF exports (2×, 25 fps, 1-bit alpha) |
+| `loaders/exports/webp/*.webp` | Animated WebP exports with alpha |
+
+All loaders are validated by `make check` (structure, gradient, no text/scripts/filters, and static-poster freshness). The animated formats are validated by `make check-animated`.

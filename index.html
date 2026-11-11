@@ -539,6 +539,12 @@
       border-top: 1px solid rgba(255, 255, 255, 0.06);
     }
 
+    .asset-downloads.secondary {
+      margin-top: 0;
+      padding-top: 0;
+      border-top: 0;
+    }
+
     .download-pill {
       display: inline-flex;
       align-items: center;
@@ -613,6 +619,68 @@
       width: 15px;
       height: 15px;
       pointer-events: none;
+    }
+
+    /* Loader Previews */
+    .loader-preview {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1px;
+      background: rgba(255, 255, 255, 0.08);
+      border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    }
+
+    .loader-stage {
+      min-height: 168px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+    }
+
+    .loader-stage.dark {
+      background: var(--bg-petroleum);
+    }
+
+    .loader-stage.light {
+      background: #FFFFFF;
+    }
+
+    .loader-stage.tall {
+      min-height: 208px;
+      padding: 14px;
+    }
+
+    .loader-stage.bar {
+      padding: 20px 22px;
+    }
+
+    .loader-stage img {
+      display: block;
+      max-width: 100%;
+      height: auto;
+    }
+
+    .loader-stage.bar img {
+      width: 100%;
+      height: 8px;
+    }
+
+    .loader-note {
+      margin-top: 22px;
+      color: var(--slate-400);
+      font-size: 14px;
+      line-height: 1.6;
+    }
+
+    .loader-note strong {
+      color: var(--slate-200);
+    }
+
+    .loader-note code {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 0.9em;
+      color: var(--slate-200);
     }
 
     /* Platform Drop-in Cards */
@@ -1062,6 +1130,12 @@
         <a href="#icons" class="sidebar-link" data-section="icons">
           <span class="nav-dot"></span>
           <span>Icons &amp; Monogram</span>
+        </a>
+      </li>
+      <li>
+        <a href="#loaders" class="sidebar-link" data-section="loaders">
+          <span class="nav-dot"></span>
+          <span>Loaders &amp; Spinners</span>
         </a>
       </li>
       <li>
@@ -1522,6 +1596,155 @@
       </div>
     </section>
 
+    <!-- Loaders & Spinners -->
+    <section id="loaders">
+      <div class="section-header">
+        <span class="tag">Motion</span>
+        <h2>Loaders &amp; Spinners</h2>
+        <p>Animated, self-contained SVGs for transient loading states. Five concepts with dark and light variants, the official gradient, a static poster for every animated file under <code>prefers-reduced-motion</code>, plus GIF and WebP exports.</p>
+      </div>
+
+      <div class="asset-grid">
+        <!-- 01 Orbit -->
+        <div class="asset-card">
+          <div class="loader-preview">
+            <div class="loader-stage dark"><img src="./loaders/01-orbit.svg" width="48" height="48" alt=""></div>
+            <div class="loader-stage light"><img src="./loaders/01-orbit.svg" width="48" height="48" alt=""></div>
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Orbit</div>
+              <span class="asset-num">01</span>
+            </div>
+            <p class="asset-desc">A single gradient arc for compact indeterminate states. 16–64 px on dark/product backgrounds.</p>
+            <div class="asset-downloads">
+              <a href="./loaders/01-orbit.svg" download class="download-pill primary">Animated SVG</a>
+              <a href="./loaders/static/01-orbit-static.svg" download class="download-pill">Static SVG</a>
+            </div>
+            <div class="asset-downloads secondary">
+              <a href="./loaders/exports/webp/01-orbit.webp" download class="download-pill">WebP</a>
+              <a href="./loaders/exports/gif/01-orbit.gif" download class="download-pill">GIF</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 02 E-assemble -->
+        <div class="asset-card">
+          <div class="loader-preview">
+            <div class="loader-stage dark"><img src="./loaders/02-e-assemble.svg" width="96" height="96" alt=""></div>
+            <div class="loader-stage light"><img src="./loaders/02-e-assemble-light.svg" width="96" height="96" alt=""></div>
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">E-assemble</div>
+              <span class="asset-num">02</span>
+            </div>
+            <p class="asset-desc">The official tile; the E stays whole while its bars brighten in sequence. 48–160 px for splash and app-boot states.</p>
+            <div class="asset-downloads">
+              <a href="./loaders/02-e-assemble.svg" download class="download-pill primary">Animated dark</a>
+              <a href="./loaders/02-e-assemble-light.svg" download class="download-pill primary">Animated light</a>
+              <a href="./loaders/static/02-e-assemble-static.svg" download class="download-pill">Poster dark</a>
+              <a href="./loaders/static/02-e-assemble-light-static.svg" download class="download-pill">Poster light</a>
+            </div>
+            <div class="asset-downloads secondary">
+              <a href="./loaders/exports/webp/02-e-assemble.webp" download class="download-pill">WebP dark</a>
+              <a href="./loaders/exports/webp/02-e-assemble-light.webp" download class="download-pill">WebP light</a>
+              <a href="./loaders/exports/gif/02-e-assemble.gif" download class="download-pill">GIF dark</a>
+              <a href="./loaders/exports/gif/02-e-assemble-light.gif" download class="download-pill">GIF light</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 03 Query bar -->
+        <div class="asset-card">
+          <div class="loader-preview">
+            <div class="loader-stage bar dark"><img src="./loaders/03-query-bar-dark.svg" alt=""></div>
+            <div class="loader-stage bar light"><img src="./loaders/03-query-bar-light.svg" alt=""></div>
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Query bar</div>
+              <span class="asset-num">03</span>
+            </div>
+            <p class="asset-desc">Indeterminate progress for pages, panels, and query execution. Full width, with a track for each background.</p>
+            <div class="asset-downloads">
+              <a href="./loaders/03-query-bar-dark.svg" download class="download-pill primary">Animated dark</a>
+              <a href="./loaders/03-query-bar-light.svg" download class="download-pill primary">Animated light</a>
+              <a href="./loaders/static/03-query-bar-dark-static.svg" download class="download-pill">Poster dark</a>
+              <a href="./loaders/static/03-query-bar-light-static.svg" download class="download-pill">Poster light</a>
+            </div>
+            <div class="asset-downloads secondary">
+              <a href="./loaders/exports/webp/03-query-bar-dark.webp" download class="download-pill">WebP dark</a>
+              <a href="./loaders/exports/webp/03-query-bar-light.webp" download class="download-pill">WebP light</a>
+              <a href="./loaders/exports/gif/03-query-bar-dark.gif" download class="download-pill">GIF dark</a>
+              <a href="./loaders/exports/gif/03-query-bar-light.gif" download class="download-pill">GIF light</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 04 Dots -->
+        <div class="asset-card">
+          <div class="loader-preview">
+            <div class="loader-stage dark"><img src="./loaders/04-dots.svg" width="60" height="20" alt=""></div>
+            <div class="loader-stage light"><img src="./loaders/04-dots.svg" width="60" height="20" alt=""></div>
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Dots</div>
+              <span class="asset-num">04</span>
+            </div>
+            <p class="asset-desc">Three gradient dots with a 120 ms stagger for inline “working” states. 16–40 px tall.</p>
+            <div class="asset-downloads">
+              <a href="./loaders/04-dots.svg" download class="download-pill primary">Animated SVG</a>
+              <a href="./loaders/static/04-dots-static.svg" download class="download-pill">Static SVG</a>
+            </div>
+            <div class="asset-downloads secondary">
+              <a href="./loaders/exports/webp/04-dots.webp" download class="download-pill">WebP</a>
+              <a href="./loaders/exports/gif/04-dots.gif" download class="download-pill">GIF</a>
+            </div>
+          </div>
+        </div>
+
+        <!-- 05 Splash -->
+        <div class="asset-card">
+          <div class="loader-preview">
+            <div class="loader-stage tall dark"><img src="./loaders/05-splash-dark.svg" width="160" height="160" alt=""></div>
+            <div class="loader-stage tall light"><img src="./loaders/05-splash-light.svg" width="160" height="160" alt=""></div>
+          </div>
+          <div class="asset-meta">
+            <div class="asset-title-row">
+              <div class="asset-title">Splash</div>
+              <span class="asset-num">05</span>
+            </div>
+            <p class="asset-desc">The tile and query bar as one centered app-boot composition. 120–240 px wide.</p>
+            <div class="asset-downloads">
+              <a href="./loaders/05-splash-dark.svg" download class="download-pill primary">Animated dark</a>
+              <a href="./loaders/05-splash-light.svg" download class="download-pill primary">Animated light</a>
+              <a href="./loaders/static/05-splash-dark-static.svg" download class="download-pill">Poster dark</a>
+              <a href="./loaders/static/05-splash-light-static.svg" download class="download-pill">Poster light</a>
+            </div>
+            <div class="asset-downloads secondary">
+              <a href="./loaders/exports/webp/05-splash-dark.webp" download class="download-pill">WebP dark</a>
+              <a href="./loaders/exports/webp/05-splash-light.webp" download class="download-pill">WebP light</a>
+              <a href="./loaders/exports/gif/05-splash-dark.gif" download class="download-pill">GIF dark</a>
+              <a href="./loaders/exports/gif/05-splash-light.gif" download class="download-pill">GIF light</a>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <p class="loader-note"><strong>Motion:</strong> Orbit 1.2 s linear · E-assemble 1.8 s ease-in-out · Query bar 1.4 s · Dots 1.2 s with 120 ms stagger. Keep one loader per view, pair it with a text status, and keep the E upright.</p>
+      <p class="loader-note"><strong>Formats:</strong> the SVG is the resolution-independent source; <strong>WebP is the default for loaders</strong> (image semantics, native loop, alpha). GIF is a 256-color, 1-bit-alpha fallback. Pause or swap the animation when <code>prefers-reduced-motion</code> is set.</p>
+      <p class="loader-note"><strong>Reduced motion:</strong> the animated files carry the media query, but browsers do not consistently apply it inside an SVG loaded as <code>&lt;img&gt;</code>. Swap in the static poster with <code>&lt;picture&gt;</code>:</p>
+      <div class="code-box">
+        <button class="code-copy-btn" onclick="copyLoaderSnippet()">Copy HTML</button>
+        <pre id="loader-snippet-code"><code>&lt;picture&gt;
+  &lt;source media="(prefers-reduced-motion: reduce)" srcset="./loaders/static/01-orbit-static.svg"&gt;
+  &lt;img src="./loaders/01-orbit.svg" width="48" height="48" alt=""&gt;
+&lt;/picture&gt;</code></pre>
+      </div>
+    </section>
+
     <!-- Platform Exports (Web, PWA, macOS) -->
     <section id="platform">
       <div class="section-header">
@@ -1741,6 +1964,14 @@
       });
     }
 
+    // Copy loader HTML snippet
+    function copyLoaderSnippet() {
+      const code = document.getElementById('loader-snippet-code').innerText;
+      copyText(code).then(() => {
+        showToast('Loader snippet copied to clipboard!');
+      });
+    }
+
     // Copy text with a fallback for browsers without the async clipboard API
     async function copyText(text) {
       if (navigator.clipboard && window.isSecureContext) {
@@ -1790,7 +2021,7 @@
 
     // Add an icon-only copy button next to every asset download link
     function setupCopyUrlButtons() {
-      document.querySelectorAll('.asset-downloads .download-pill, .platform-card .download-pill').forEach(link => {
+      document.querySelectorAll('.asset-downloads:not(.secondary) .download-pill, .platform-card .download-pill').forEach(link => {
         if (link.parentElement.classList.contains('download-action')) return;
 
         const url = link.href;
@@ -1840,6 +2071,27 @@
 
     setupCopyUrlButtons();
     setupPlaygroundCopyButton();
+
+    // Swap loader previews for static posters when reduced motion is preferred
+    const loaderMotion = matchMedia('(prefers-reduced-motion: reduce)');
+    const loaderImages = Array.from(document.querySelectorAll('.loader-stage img'));
+    const staticLoaderSrc = (src) => src.replace('/loaders/', '/loaders/static/').replace(/\.svg$/, '-static.svg');
+
+    loaderImages.forEach(img => {
+      img.dataset.animated = img.getAttribute('src');
+    });
+
+    function swapLoaderPosters() {
+      loaderImages.forEach(img => {
+        const src = loaderMotion.matches
+          ? staticLoaderSrc(img.dataset.animated)
+          : img.dataset.animated;
+        if (img.getAttribute('src') !== src) img.setAttribute('src', src);
+      });
+    }
+
+    swapLoaderPosters();
+    if (loaderMotion.addEventListener) loaderMotion.addEventListener('change', swapLoaderPosters);
 
     // Show toast message
     function showToast(msg) {
