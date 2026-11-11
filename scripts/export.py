@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""Regenerate the EasySQL brand kit raster exports.
+"""Regenerate the EasySQL brand kit raster, platform and social exports.
 
 Requires ImageMagick 7 built with librsvg, and Python 3.8+.
 Paths resolve from the repository root, so the script can be run from anywhere.
@@ -35,10 +35,17 @@ LOGO_SOURCES = (
     "06-light-text-only",
     "06-light-text-only-mono",
 )
-ICON_SOURCES = ("07-dark-icon-only", "08-light-icon-only")
+ICON_SOURCES = (
+    "07-dark-icon-only",
+    "08-light-icon-only",
+    "07-dark-icon-only-mono",
+    "08-light-icon-only-mono",
+)
 SMALL_ICON_SOURCES = {
     "07-dark-icon-only": "07-dark-icon-small",
     "08-light-icon-only": "08-light-icon-small",
+    "07-dark-icon-only-mono": "07-dark-icon-small-mono",
+    "08-light-icon-only-mono": "08-light-icon-small-mono",
 }
 SMALL_ICON_SIZES = (16, 24)
 SMALL_ICO_SIZES = (16, 20, 24)
@@ -72,6 +79,19 @@ ICO_SIZES = (16, 20, 24, 32, 40, 48, 64, 128, 256)
 FAVICON_SIZES = (16, 32, 48)
 PLATFORM_ICON_SIZES = (192, 512)
 APPLE_TOUCH_SIZE = 180
+MASKABLE_SIZES = (192, 512)
+ADAPTIVE_SIZE = 432
+SOCIAL_DIR = ROOT / "social/exports"
+BACKGROUND_SVGS = {
+    "01-dark-horizontal-bg": "#0F2B3D",
+    "02-light-horizontal-bg": "#FFFFFF",
+    "03-dark-stacked-bg": "#0F2B3D",
+    "04-light-stacked-bg": "#FFFFFF",
+    "05-dark-text-only-bg": "#0F2B3D",
+    "06-light-text-only-bg": "#FFFFFF",
+}
+SVG_TAG_RE = re.compile(r"<svg ([^>]*)>(.*)</svg>", re.S)
+ATTR_RE = re.compile(r'([\w-]+)="([^"]*)"')
 
 # ICNS chunk type -> pixel size. 1x and @2x entries share pixel sizes.
 ICNS_TYPES = (
@@ -90,6 +110,12 @@ ICNS_TYPES = (
 
 def run(cmd):
     subprocess.run([str(part) for part in cmd], check=True)
+
+
+def copy_asset(source, target):
+    target.parent.mkdir(parents=True, exist_ok=True)
+    shutil.copyfile(source, target)
+    print(f"web     {target.relative_to(ROOT)}")
 
 
 def require_magick():
@@ -116,6 +142,7 @@ def render(svg, out, target, depth=16, background=None):
     ]
     if background:
         cmd += ["-alpha", "remove", "-alpha", "off"]
+    cmd += ["-resize", f"{target}x"]
     cmd += ["-define", "png:exclude-chunk=date,time"]
     cmd += ["-depth", str(depth), out]
     out.parent.mkdir(parents=True, exist_ok=True)
@@ -254,6 +281,30 @@ def build_platform():
         render(dark, out, size)
         print(f"web     {out.relative_to(ROOT)}")
 
+    maskable = ROOT / "icon/exports/svg" / "maskable-icon.svg"
+    for size in MASKABLE_SIZES:
+        out = web / f"maskable-{size}x{size}.png"
+        render(maskable, out, size)
+        print(f"web     {out.relative_to(ROOT)}")
+
+    for layer in ("foreground", "background"):
+        svg = ROOT / "icon/exports/svg" / f"adaptive-icon-{layer}.svg"
+        copy_asset(svg, web / f"android-adaptive-{layer}.svg")
+        out = web / f"android-adaptive-{layer}-{ADAPTIVE_SIZE}x{ADAPTIVE_SIZE}.png"
+        render(svg, out, ADAPTIVE_SIZE)
+        print(f"web     {out.relative_to(ROOT)}")
+
+    themed = ROOT / "icon/exports/svg" / "themed-icon.svg"
+    copy_asset(themed, web / "android-themed-icon.svg")
+    out = web / f"android-themed-icon-{ADAPTIVE_SIZE}x{ADAPTIVE_SIZE}.png"
+    render(themed, out, ADAPTIVE_SIZE)
+    print(f"web     {out.relative_to(ROOT)}")
+
+    copy_asset(
+        ROOT / "icon/exports/svg" / "07-dark-icon-small.svg",
+        web / "favicon.svg",
+    )
+
 
 def build_macos():
     with tempfile.TemporaryDirectory() as tmp:
@@ -267,6 +318,141 @@ def build_macos():
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_bytes(icns_bytes([(chunk_type, frames[size]) for chunk_type, size in ICNS_TYPES]))
     print(f"macos   {out.relative_to(ROOT)}")
+
+
+def svg_view_box(path):
+    match = SVG_TAG_RE.search(path.read_text(encoding="utf-8"))
+    if not match:
+        raise SystemExit(f"cannot read SVG: {path}")
+    view_box = dict(ATTR_RE.findall(match.group(1))).get("viewBox")
+    if not view_box:
+        raise SystemExit(f"missing viewBox: {path}")
+    return view_box
+
+
+def view_box_size(path):
+    values = [float(value) for value in svg_view_box(path).replace(",", " ").split()]
+    if len(values) != 4:
+        raise SystemExit(f"invalid viewBox: {path}")
+    return values[2], values[3]
+
+
+def embed_svg(path, x, y, width, height):
+    match = SVG_TAG_RE.search(path.read_text(encoding="utf-8"))
+    if not match:
+        raise SystemExit(f"cannot embed SVG: {path}")
+    attrs = (
+        f'x="{round(x, 2):g}" y="{round(y, 2):g}" '
+        f'width="{round(width, 2):g}" height="{round(height, 2):g}" '
+        f'viewBox="{svg_view_box(path)}"'
+    )
+    return f"  <svg {attrs}>\n{match.group(2).strip('\n')}\n  </svg>"
+
+
+def place_logo(path, target_width, canvas_width, canvas_height):
+    view_width, view_height = view_box_size(path)
+    width = float(target_width)
+    height = width * view_height / view_width
+    return embed_svg(
+        path,
+        (canvas_width - width) / 2,
+        (canvas_height - height) / 2,
+        width,
+        height,
+    )
+
+
+def social_og_svg():
+    logo = ROOT / "logo/exports/svg" / "01-dark-horizontal.svg"
+    return (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" width="1200" height="630">\n'
+        '  <rect width="1200" height="630" fill="#0F2B3D"/>\n'
+        f"{place_logo(logo, 720, 1200, 630)}\n"
+        "</svg>\n"
+    )
+
+
+def social_avatar_svg():
+    icon = ROOT / "icon/exports/svg" / "07-dark-icon-only.svg"
+    return (
+        '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" width="512" height="512">\n'
+        '  <rect width="512" height="512" fill="#0F2B3D"/>\n'
+        f"{embed_svg(icon, 96, 96, 320, 320)}\n"
+        "</svg>\n"
+    )
+
+
+def social_cards():
+    return (
+        ("og-image", social_og_svg(), (1200, 630)),
+        ("avatar", social_avatar_svg(), (512, 512)),
+    )
+
+
+def build_social():
+    SOCIAL_DIR.mkdir(parents=True, exist_ok=True)
+    for name, svg_text, size in social_cards():
+        svg = SOCIAL_DIR / f"{name}.svg"
+        svg.write_text(svg_text, encoding="utf-8")
+        print(f"social  {svg.relative_to(ROOT)}")
+        out = SOCIAL_DIR / f"{name}.png"
+        render(svg, out, size[0])
+        print(f"social  {out.relative_to(ROOT)}")
+
+
+def check_social():
+    errors = []
+    checked = 0
+    for name, expected, size in social_cards():
+        svg = SOCIAL_DIR / f"{name}.svg"
+        checked += 1
+        if not svg.exists():
+            errors.append(f"missing {svg.relative_to(ROOT)}")
+        elif svg.read_text(encoding="utf-8") != expected:
+            errors.append(f"{svg.relative_to(ROOT)}: stale; run make social")
+        png = SOCIAL_DIR / f"{name}.png"
+        checked += 1
+        if not png.exists():
+            errors.append(f"missing {png.relative_to(ROOT)}")
+        elif png_size(png) != size:
+            errors.append(
+                f"{png.relative_to(ROOT)}: {png_size(png)}, expected {size[0]}x{size[1]}"
+            )
+    return errors, checked
+
+
+def check_background_svgs():
+    errors = []
+    checked = 0
+    for name, fill in BACKGROUND_SVGS.items():
+        checked += 1
+        svg = ROOT / "logo/exports/svg" / f"{name}.svg"
+        if not svg.exists():
+            errors.append(f"missing {svg.relative_to(ROOT)}")
+            continue
+        try:
+            root = ElementTree.parse(svg).getroot()
+        except ElementTree.ParseError as exc:
+            errors.append(f"{svg.relative_to(ROOT)}: {exc}")
+            continue
+        if any(local_tag(element.tag) == "text" for element in root.iter()):
+            errors.append(f"{svg.relative_to(ROOT)}: live text")
+            continue
+        view_box = [float(value) for value in root.get("viewBox", "").split()]
+        if len(view_box) != 4:
+            errors.append(f"{svg.relative_to(ROOT)}: invalid viewBox")
+            continue
+        rects = [element for element in root.iter() if local_tag(element.tag) == "rect"]
+        if not any(
+            element.get("fill") == fill
+            and all(
+                float(element.get(attr, 0)) == value
+                for attr, value in zip(("x", "y", "width", "height"), view_box)
+            )
+            for element in rects
+        ):
+            errors.append(f"{svg.relative_to(ROOT)}: missing opaque background")
+    return errors, checked
 
 
 def local_tag(tag):
@@ -392,6 +578,26 @@ def check():
     expect_png(web / "apple-touch-icon.png", (APPLE_TOUCH_SIZE, APPLE_TOUCH_SIZE))
     for size in PLATFORM_ICON_SIZES:
         expect_png(web / f"android-chrome-{size}x{size}.png", (size, size))
+    for size in MASKABLE_SIZES:
+        expect_png(web / f"maskable-{size}x{size}.png", (size, size))
+    for name in (
+        "android-adaptive-foreground",
+        "android-adaptive-background",
+        "android-themed-icon",
+    ):
+        expect_png(
+            web / f"{name}-{ADAPTIVE_SIZE}x{ADAPTIVE_SIZE}.png",
+            (ADAPTIVE_SIZE, ADAPTIVE_SIZE),
+        )
+    for name in (
+        "favicon.svg",
+        "android-adaptive-foreground.svg",
+        "android-adaptive-background.svg",
+        "android-themed-icon.svg",
+    ):
+        checked += 1
+        if not (web / name).exists():
+            errors.append(f"missing {web.relative_to(ROOT)}/{name}")
     favicon = web / "favicon.ico"
     checked += 1
     if not favicon.exists():
@@ -409,6 +615,14 @@ def check():
     errors.extend(check_loaders())
     checked += len(LOADER_SOURCES) * 2
 
+    social_errors, social_checked = check_social()
+    errors.extend(social_errors)
+    checked += social_checked
+
+    background_errors, background_checked = check_background_svgs()
+    errors.extend(background_errors)
+    checked += background_checked
+
     if errors:
         for error in errors:
             print(f"FAIL {error}", file=sys.stderr)
@@ -420,7 +634,16 @@ def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "action",
-        choices=["logos", "icons", "ico", "platform", "macos", "all", "check"],
+        choices=[
+            "logos",
+            "icons",
+            "ico",
+            "platform",
+            "macos",
+            "social",
+            "all",
+            "check",
+        ],
     )
     args = parser.parse_args()
 
@@ -430,11 +653,12 @@ def main():
         "ico": build_ico,
         "platform": build_platform,
         "macos": build_macos,
+        "social": build_social,
         "check": check,
     }
     if args.action == "all":
         require_magick()
-        for name in ("logos", "icons", "ico", "platform", "macos"):
+        for name in ("logos", "icons", "ico", "platform", "macos", "social"):
             actions[name]()
         check()
     else:

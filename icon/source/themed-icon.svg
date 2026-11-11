@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108">
+  <defs>
+    <mask id="knockout">
+      <rect x="5.4" y="5.4" width="97.2" height="97.2" rx="21.6" fill="#FFFFFF"/>
+      <text x="54" y="54" text-anchor="middle" dominant-baseline="central" font-family="'Inter', system-ui, sans-serif" font-size="59.4" font-weight="800" fill="#000000">E</text>
+    </mask>
+  </defs>
+  <rect x="5.4" y="5.4" width="97.2" height="97.2" rx="21.6" fill="#FFFFFF" mask="url(#knockout)"/>
+</svg>
