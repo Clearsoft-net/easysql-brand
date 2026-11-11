@@ -27,7 +27,7 @@ PAIRS = [
     (ROOT / "icon/source", ROOT / "icon/exports/svg", None),
 ]
 
-TEXT_RE = re.compile(r"  <text ([^>]*)>(.*?)</text>", re.S)
+TEXT_RE = re.compile(r"^([ \t]*)<text ([^>]*)>(.*?)</text>", re.S | re.M)
 ATTR_RE = re.compile(r'([\w-]+)="([^"]*)"')
 TSPAN_RE = re.compile(r"<tspan ([^>]*)>(.*?)</tspan>", re.S)
 FAMILY_RE = re.compile(r"'([^']+)'|\"([^\"]+)\"")
@@ -121,7 +121,7 @@ def shape_run(text, font_file, size, start_x, baseline):
     return pen.getCommands(), cursor * scale, bounds_pen.bounds
 
 
-def outline_text(attrs, content):
+def outline_text(attrs, content, indent="  "):
     runs = []
     for text, span_attrs in split_runs(content):
         merged = dict(attrs)
@@ -167,7 +167,7 @@ def outline_text(attrs, content):
         cursor += dx
         path, _, run_bounds = shape_run(text, font_path(family, weight), size, cursor, baseline)
         fill = run_attrs.get("fill", attrs.get("fill", "#000000"))
-        output.append(f'  <path d="{path}" fill="{fill}"/>')
+        output.append(f'{indent}<path d="{path}" fill="{fill}"/>')
         bounds = merge_bounds(bounds, run_bounds)
         cursor += advance
     return "\n".join(output), bounds
@@ -195,9 +195,10 @@ def outline_svg(text, padding=None):
 
     def replace(match):
         nonlocal bounds
-        attrs = dict(ATTR_RE.findall(match.group(1)))
-        content = match.group(2).strip()
-        output, text_bounds = outline_text(attrs, content)
+        indent = match.group(1)
+        attrs = dict(ATTR_RE.findall(match.group(2)))
+        content = match.group(3).strip()
+        output, text_bounds = outline_text(attrs, content, indent)
         bounds = merge_bounds(bounds, text_bounds)
         return output
 

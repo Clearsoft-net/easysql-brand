@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 108 108" width="108" height="108">
+  <defs>
+    <mask id="knockout">
+      <rect x="5.4" y="5.4" width="97.2" height="97.2" rx="21.6" fill="#FFFFFF"/>
+      <path d="M39.251513671875 75.60791015625V32.39208984375H69.241552734375V40.74521484375H49.48989257812501V49.67841796875H67.675341796875V57.857519531250006H49.48989257812501V67.25478515625H69.212548828125V75.60791015625Z" fill="#000000"/>
+    </mask>
+  </defs>
+  <rect x="5.4" y="5.4" width="97.2" height="97.2" rx="21.6" fill="#FFFFFF" mask="url(#knockout)"/>
+</svg>
