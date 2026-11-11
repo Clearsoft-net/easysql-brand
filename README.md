@@ -152,7 +152,7 @@ Static posters are generated from the animated SVGs with `make loaders` (also ru
 ## 🛠 Source vs. Exports
 
 - **`logo/source/` and `icon/source/`** — editable text sources. Edit here, then run `make outline`.
-- **`logo/exports/svg/` and `icon/exports/svg/`** — outlined, self-contained SVGs. These are the files linked below and the input for every export; they render identically without the fonts.
+- **`logo/exports/svg/` and `icon/exports/svg/`** — outlined, self-contained SVGs. Logo SVGs are cropped to the artwork with an 8 px transparent border at 1× (same canvas as the 1× PNG); icon SVGs keep the full canvas. These are the files linked below and the input for every export; they render identically without the fonts.
 - **`logo/exports/`, `icon/exports/`** — generated files: PNGs (1×/2×/3× for logos, absolute sizes for icons), multi-resolution ICOs, the web platform set, and the macOS ICNS. Do not edit these by hand.
 - **`loaders/`** — self-contained animated SVGs; **`loaders/static/`** holds the generated posters used for `prefers-reduced-motion`, and **`loaders/exports/`** the generated GIF/WebP formats. They contain no live text and do not go through `make outline`; run `make loaders` and `make animated` after editing an animated file.
 
@@ -179,7 +179,7 @@ Animated formats are generated separately: `make animated` needs Node 22+, Chrom
 
 An SVG user unit is a CSS pixel at 96 dpi; the build script derives every density from the target pixel size. Outputs are byte-reproducible (date chunks are excluded from the PNGs).
 
-Logo PNGs are cropped to their artwork so the viewBox padding never returns: `-trim +repage -bordercolor none -border 8` at 1×, with the border scaling to 16 px at 2× and 24 px at 3×. Icon exports keep the full canvas because their sizes are absolute.
+Logo exports are cropped to their artwork: `make outline` writes the distribution SVGs with the viewBox trimmed to the content plus an 8 px transparent border at 1× (261×88 horizontal, 145×130 stacked, 181×70 wordmark), and the PNGs repeat the same crop with `-trim +repage -bordercolor none -border 8` at 1× — the border scales to 16 px at 2× and 24 px at 3×. The editable sources keep their design viewBox. Icon exports keep the full canvas because their sizes are absolute.
 
 ---
 
