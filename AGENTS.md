@@ -80,6 +80,34 @@ make clean        # delete generated exports, social cards, loader posters and a
   and fails when the family does not match.
 - Exports are byte-reproducible; PNG date chunks are excluded.
 
+## Release
+
+Manual, no CI: validate, then tag and publish with `gh`.
+
+1. From a clean `main`, `make outline && make` must leave `git status` clean
+   (exports are reproducible), and `make check` plus `make check-animated` must
+   pass.
+2. Tag and publish in one step, on the `main` commit, with the kit attached:
+
+```sh
+git archive --format=zip --prefix=brand-kit/ -o /tmp/easysql-brand-kit.zip \
+  HEAD README.md LICENSE docs logo/exports icon/exports loaders social/exports
+gh release create vX.Y.Z /tmp/easysql-brand-kit.zip --target <sha> \
+  --title "EasySQL Brand Kit vX.Y.Z" --latest --notes-file -
+```
+
+- Tags are lightweight (`v1.0.0`, `v2.0.0`); `gh release create --target`
+  creates the tag, so no separate `git push --tags`.
+- Bump the major when a pinned asset changes shape or file: v2.0.0 was the
+  identity refresh, not an additive change.
+- The asset is always `easysql-brand-kit.zip` and carries distribution only:
+  `README.md`, `LICENSE`, `docs/`, the `exports/` trees, `loaders/` and
+  `social/`. Sources, `scripts/`, `Makefile` and `index.html` stay in the
+  repository.
+- Notes in English (what changed, what is included, build, download); publish
+  the release, never leave it as a draft.
+- `gh` must be authenticated with `repo` scope on `Clearsoft-net/easysql-brand`.
+
 ## Source vs exports
 
 - Edit only `*/source/`. `*/exports/` is generated; never hand-edit it.
